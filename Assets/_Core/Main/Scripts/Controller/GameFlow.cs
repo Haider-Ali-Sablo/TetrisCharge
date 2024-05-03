@@ -6,7 +6,7 @@ namespace Sablo.Core
 {
     public class GameFlow : MonoBehaviour, IGameFlow
     {
-        [SerializeField] private MainMenuModule[] _modules;
+        [SerializeField] private BaseModule[] _modules;
         private AsyncOperation _sceneLoadingOperation;
         
         private void Awake()
@@ -40,7 +40,7 @@ namespace Sablo.Core
             IEnumerator PostInitialize()
             {
                 yield return null;
-                for(var i = 0; i<=_modules.Length; i++)
+                for(var i = 0; i<_modules.Length; i++)
                 {
                     _modules[i].PostInitialize();
                 }

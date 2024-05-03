@@ -4,9 +4,14 @@ namespace Sablo.UI
 {
     public class BaseView : MonoBehaviour
     {
-        public virtual void Show()
+        public virtual void Initialize(object model)
         {
             Register();
+        }
+        
+        public virtual void Show()
+        {
+            SetViewState(true);
         }
 
         public virtual  void Register()
@@ -22,6 +27,7 @@ namespace Sablo.UI
         public virtual void Hide()
         {
             Unregister();
+            SetViewState(false);
         }
 
         public void SetViewState(bool state) => gameObject.SetActive(state);
