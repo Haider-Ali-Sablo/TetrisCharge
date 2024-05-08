@@ -1,5 +1,6 @@
+using System;
+using Sablo.Core;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Sablo.Loading
 {
@@ -11,12 +12,21 @@ namespace Sablo.Loading
         
         void ILoadingView.Initialize()
         {
-           
+            _viewRefs.loadingBarFillImage.fillAmount = 0;
         }
 
-        void ILoadingView.SetProgressState(float progress)
+        void ILoadingView.SetProgressState(float progress,Action callback = null)
         {
+            var fillDelta = Configs.ViewConfig.LoadingFillDelta;
             
+            var fillAmount = Mathf.MoveTowards(_viewRefs.loadingBarFillImage.fillAmount, progress,
+                fillDelta * Time.deltaTime);
+            _viewRefs.loadingBarFillImage.fillAmount = fillAmount;
+            if (fillAmount == 1f)
+            {
+                callback?.Invoke();
+            }
+
         }
     }
 }
