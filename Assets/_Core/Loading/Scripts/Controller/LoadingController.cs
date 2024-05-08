@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Threading.Tasks;
 using Sablo.Core;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -11,9 +12,11 @@ namespace Sablo.Loading
         public ILoadingView ViewHandler { private get; set; }
         
         private AsyncOperation _sceneLoadingOperation;
+        private float _target;
 
         private void Start()
         {
+            ViewHandler.Initialize();
             LoadScene();
         }
         
@@ -21,34 +24,21 @@ namespace Sablo.Loading
         {
             _sceneLoadingOperation = SceneManager.LoadSceneAsync(Constants.SceneName.MainScene);
             _sceneLoadingOperation.allowSceneActivation = false;
-            SetProgressState();
-        }   
-
-        private void SetProgressState()
+            StartCoroutine( SetProgressState());
+        }
+        private IEnumerator SetProgressState()
         {
-            var delay = 0.1f;
-            var wait = new WaitForSeconds(delay);
-            
-            StartCoroutine(Progression());
-            IEnumerator Progression()
+            while (!_sceneLoadingOperation.isDone)
             {
-                Initialize(() =>
-                {
-                    _sceneLoadingOperation.allowSceneActivation = true;
-                    ViewHandler.SetProgressState(1);
-                });
-                
-                while (!_sceneLoadingOperation.isDone)
-                {
-                    yield return wait;
-                    ViewHandler.SetProgressState(_sceneLoadingOperation.progress);
-                }
+               _target =  Mathf.Clamp01(_sceneLoadingOperation.progress/ Configs.ViewConfig.LoadingBarthreshold);
+               ViewHandler.SetProgressState(_target, Initialize);
+                yield return null;
             }
         }
-        
-        private void Initialize(Action onComplete = null)
+
+        void Initialize( )
         {
-            onComplete?.Invoke();
+            _sceneLoadingOperation.allowSceneActivation = true;
         }
     }
 }
