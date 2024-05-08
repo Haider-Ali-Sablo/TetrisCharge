@@ -6,26 +6,33 @@ namespace Sablo.Gameplay.Grid
     public class Grid : BaseGameplayModule
     {
         [SerializeField] private GridView _view;
+        [SerializeField] private Tile _baseTile;
         [SerializeField] private int _width;
         [SerializeField] private int _height;
-        [SerializeField] private float _cellOffset;
+      
         private Cell[,] _grid;
+        private float _cellOffset;
+        
         
         public override void Initialize()
         {
             base.Initialize();
-            
-            // _width = Configs.GameConfig.GridWidth;
-            // _height = Configs.GameConfig.GridHeight;
-            // _cellOffset = Configs.GameConfig.CellOffsetMultiplier;
+            SetData();
             InitializeView();
             GenerateGrid();
+        }
+        
+        private void SetData()
+        {
+            _cellOffset = _baseTile.height;
+            // _width = Configs.GameConfig.GridWidth;
+            // _height = Configs.GameConfig.GridHeight;
         }
         
         public void GenerateGrid()
         {
             _grid = new Cell[_width, _height];
-        
+            
             for (int rowIndex = 0; rowIndex < _width; rowIndex++)
             {
                 for (int columnIndex = 0; columnIndex < _height; columnIndex++)

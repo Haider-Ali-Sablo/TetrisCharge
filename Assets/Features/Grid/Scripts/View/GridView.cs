@@ -17,7 +17,7 @@ namespace Sablo.UI.Grid
 
         private void CalculateStartingPosition()
         {
-            var screenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
+            var screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2);
             _startingPosition = screenCenter - new Vector2(_model.GridWidth* _model.CellOffset / 2, _model.GridHeight * _model.CellOffset / 2);
         }
 
