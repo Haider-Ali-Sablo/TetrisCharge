@@ -8,6 +8,7 @@ namespace Sablo.Gameplay.Grid
         [SerializeField] private RectTransform _rectTransform;
         [SerializeField] private Button _tileButton;
         [SerializeField] private Vector2Int _index;
+        [SerializeField] private GameObject _overlayImage;
         public float height => _rectTransform.rect.height;
         
         public void Initialize()
@@ -33,6 +34,17 @@ namespace Sablo.Gameplay.Grid
         {
             
         }
+
+        public void HighlightTile()
+        {
+            _overlayImage.SetActive(true);
+        }
+
+        public Vector2 GetPosition()
+        {
+            return _rectTransform.position;
+        }
+        
     }
     
 }
