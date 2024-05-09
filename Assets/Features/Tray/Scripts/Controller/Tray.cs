@@ -48,6 +48,16 @@ namespace Sablo.Gameplay.Shape
         {
             
         }
+
+        void ITray.OnInputDrag(Vector2 position, Vector2 plugPosition)
+        {
+            GridHandler.IsWithinBoundsOfGrid(position, plugPosition);
+        }
+
+        public List<Vector2Int> GetShapeTileIndices()
+        {
+            return _view.GetTilesIndicesOfShape();
+        }
     }
 }
 

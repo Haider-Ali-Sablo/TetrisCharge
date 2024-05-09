@@ -8,6 +8,7 @@ namespace Sablo.Gameplay.Shape
     {
         [SerializeField] protected List<Tile> _tiles;
         [SerializeField] private RectTransform _rectTransform;
+        [SerializeField] private RectTransform _plugTransform;
         private List<Vector2Int> _tileIndex;
         
         public virtual void Initialize()
@@ -38,6 +39,11 @@ namespace Sablo.Gameplay.Shape
         public RectTransform GetRectTransform()
         {
             return _rectTransform;
+        }
+
+        public Vector2 GetPlugPosition()
+        {
+            return _plugTransform.position;
         }
     }
 }

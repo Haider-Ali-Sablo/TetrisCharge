@@ -1,18 +1,22 @@
+using System.Collections.Generic;
+using Sablo.Gameplay.Shape;
 using Sablo.UI.Grid;
 using UnityEngine;
 
 namespace Sablo.Gameplay.Grid
 {
-    public class Grid : BaseGameplayModule
+    public class Grid : BaseGameplayModule, IGrid
     {
         [SerializeField] private GridView _view;
         [SerializeField] private Tile _baseTile;
-        [SerializeField] private int _width;
-        [SerializeField] private int _height;
+        [SerializeField] private int _gridWidth;
+        [SerializeField] private int _gridHeight;
       
         private Cell[,] _grid;
+        private List<Cell> _highlightedCells;
         private float _cellOffset;
         
+        public ITray TrayHandler { private get; set; }
         
         public override void Initialize()
         {
@@ -31,11 +35,11 @@ namespace Sablo.Gameplay.Grid
         
         public void GenerateGrid()
         {
-            _grid = new Cell[_width, _height];
+            _grid = new Cell[_gridWidth, _gridHeight];
             
-            for (int rowIndex = 0; rowIndex < _width; rowIndex++)
+            for (int rowIndex = 0; rowIndex < _gridWidth; rowIndex++)
             {
-                for (int columnIndex = 0; columnIndex < _height; columnIndex++)
+                for (int columnIndex = 0; columnIndex < _gridHeight; columnIndex++)
                 {
                     var xPos = rowIndex * _cellOffset;
                     var yPos = columnIndex * _cellOffset;
@@ -58,10 +62,61 @@ namespace Sablo.Gameplay.Grid
         {
             _view.Initialize(new GridViewDataModel()
             {
-                GridWidth = _width,
-                GridHeight = _height,
+                GridWidth = _gridWidth,
+                GridHeight = _gridHeight,
                 CellOffset = _cellOffset
             });
         }
+
+        void IGrid.IsWithinBoundsOfGrid(Vector2 position, Vector2 plugPosition)
+        {
+            var isWithInBoundsOfGrid = _view.IsWithInBoundsOfGrid(position);
+            if (isWithInBoundsOfGrid)
+            {
+                HighlightShape(plugPosition);
+            }
+           
+        }
+
+        private void HighlightShape(Vector2 plugPosition)
+        {
+            var closestCell = GetClosestCell(plugPosition);
+            var shapeTiles = TrayHandler.GetShapeTileIndices();
+            for (var i=0; i< shapeTiles.Count ; i++)
+            {
+                var index = shapeTiles[i] + closestCell;
+                if (index.x >= _gridWidth  || index.y >= _gridHeight || index.x <0 || index.y <0)
+                {
+                    return;
+                }   
+                var cell = _grid[index.x, index.y];
+                cell.HighlightTile();
+            }
+        }
+        
+        private Vector2Int GetClosestCell(Vector2 plugPosition)
+        {
+            var minDistance = Mathf.Infinity;
+            var closestIndex = new Vector2Int(-1, -1);
+
+            for (int xIndex = 0; xIndex < _gridWidth; xIndex++)
+            {
+                for (int yIndex = 0; yIndex < _gridHeight; yIndex++)
+                {
+                    var cell = _grid[xIndex, yIndex];
+                    var cellPosition = cell.GetCellPosition();
+                    var distance = Vector2.Distance(cellPosition, plugPosition);
+
+                    if (distance < minDistance)
+                    {
+                        minDistance = distance;
+                        closestIndex.x = xIndex;
+                        closestIndex.y = yIndex;
+                    }
+                }
+            }
+            return closestIndex;
+        }
+
     }
 }

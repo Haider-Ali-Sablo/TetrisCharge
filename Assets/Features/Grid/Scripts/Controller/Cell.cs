@@ -8,11 +8,9 @@ namespace Sablo.Gameplay.Grid
         private Tile _tile;
         private bool _isOccupied;
         private Vector2Int _index;
-        private Vector2 _position;
         
         public void Initialize(Vector2 position, Tile _defaultTile, Vector2Int index)
         {
-            SetCellPosition(position);
             AddDefaultTile(_defaultTile);
             SetIndex(index);
         }
@@ -26,10 +24,17 @@ namespace Sablo.Gameplay.Grid
         {
             _defaultTile = tile;
         }
-        
-        private void SetCellPosition(Vector2 position)
+
+        public void HighlightTile()
         {
-            _position = position;
+            _defaultTile.HighlightTile();
+        }
+        
+        private void SetCellPosition(Vector2 position) { }
+
+        public Vector2 GetCellPosition()
+        {
+            return _defaultTile.GetPosition();
         }
         
         public bool IsTileOccupied()

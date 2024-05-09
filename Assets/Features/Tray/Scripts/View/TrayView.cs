@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Sablo.Core;
 using Sablo.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -66,13 +65,21 @@ namespace Sablo.Gameplay.Shape
         {
             if (_currentlySelecedShape != null)
             {
-                _currentlySelecedShape.MoveToPosition(eventData.position);
+                var shapePosition = eventData.position;
+                var plugPosition = _currentlySelecedShape.GetPlugPosition();
+                _currentlySelecedShape.MoveToPosition(shapePosition);
+                _handler.OnInputDrag(shapePosition, plugPosition);
             }
         }
 
         public void OnEndDrag(PointerEventData eventData)
         {
             OnTrayReleased();
+        }
+
+        public List<Vector2Int> GetTilesIndicesOfShape()
+        {
+            return _currentlySelecedShape.GetTileIndex();
         }
     }
 }
