@@ -40,6 +40,12 @@ namespace Sablo.Gameplay.Grid
             _overlayImage.SetActive(true);
         }
 
+        public void RemoveHighlight()
+        {
+            _overlayImage.SetActive(false);
+        }
+        
+
         public Vector2 GetPosition()
         {
             return _rectTransform.position;

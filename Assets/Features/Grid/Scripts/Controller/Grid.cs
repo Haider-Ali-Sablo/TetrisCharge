@@ -14,6 +14,7 @@ namespace Sablo.Gameplay.Grid
       
         private Cell[,] _grid;
         private List<Cell> _highlightedCells;
+        private Vector2Int _currentClosestCell;
         private float _cellOffset;
         
         public ITray TrayHandler { private get; set; }
@@ -28,6 +29,8 @@ namespace Sablo.Gameplay.Grid
         
         private void SetData()
         {
+            _highlightedCells = new List<Cell>();
+            _currentClosestCell = new Vector2Int();
             _cellOffset = _baseTile.height;
             // _width = Configs.GameConfig.GridWidth;
             // _height = Configs.GameConfig.GridHeight;
@@ -71,16 +74,18 @@ namespace Sablo.Gameplay.Grid
         void IGrid.IsWithinBoundsOfGrid(Vector2 position, Vector2 plugPosition)
         {
             var isWithInBoundsOfGrid = _view.IsWithInBoundsOfGrid(position);
+            RemoveHighlightFromPreviousCells();
             if (isWithInBoundsOfGrid)
             {
                 HighlightShape(plugPosition);
             }
-           
         }
 
         private void HighlightShape(Vector2 plugPosition)
         {
             var closestCell = GetClosestCell(plugPosition);
+            if (_currentClosestCell == closestCell) { return; }
+            
             var shapeTiles = TrayHandler.GetShapeTileIndices();
             for (var i=0; i< shapeTiles.Count ; i++)
             {
@@ -91,7 +96,19 @@ namespace Sablo.Gameplay.Grid
                 }   
                 var cell = _grid[index.x, index.y];
                 cell.HighlightTile();
+                _highlightedCells.Add(cell);
             }
+        }
+
+        private void RemoveHighlightFromPreviousCells()
+        {
+            if (_highlightedCells.Count == 0) {return;}
+            
+            for (var i = 0; i < _highlightedCells.Count; i++)
+            {
+                _highlightedCells[i].RemoveHighlightTile();
+            }
+            _highlightedCells = new List<Cell>();
         }
         
         private Vector2Int GetClosestCell(Vector2 plugPosition)
@@ -117,6 +134,5 @@ namespace Sablo.Gameplay.Grid
             }
             return closestIndex;
         }
-
     }
 }
