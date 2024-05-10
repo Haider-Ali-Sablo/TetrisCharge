@@ -776,6 +776,7 @@ MonoBehaviour:
   _baseTile: {fileID: 7026010840590635813, guid: 180adff3411534132b296d719e7fa068, type: 3}
   _gridWidth: 6
   _gridHeight: 6
+  _gridOffset: 140
 --- !u!1 &1423421030
 GameObject:
   m_ObjectHideFlags: 0

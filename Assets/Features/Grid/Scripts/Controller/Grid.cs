@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using Sablo.Core;
 using Sablo.Gameplay.Shape;
 using Sablo.UI.Grid;
 using UnityEngine;
@@ -10,14 +11,13 @@ namespace Sablo.Gameplay.Grid
     {
         [SerializeField] private GridView _view;
         [SerializeField] private Tile _baseTile;
-        [SerializeField] private int _gridWidth;
-        [SerializeField] private int _gridHeight;
-        [SerializeField] private float _gridOffset;
-      
+        private int _gridWidth;
+        private int _gridHeight;
+        private float _cellOffset;
         private Cell[,] _grid;
         private List<Cell> _highlightedCells;
         private Vector2Int _currentClosestCell;
-        private float _cellOffset;
+
         
         public ITray TrayHandler { private get; set; }
         
@@ -33,9 +33,9 @@ namespace Sablo.Gameplay.Grid
         {
             _highlightedCells = new List<Cell>();
             _currentClosestCell = new Vector2Int();
-            _cellOffset = _baseTile.height;
-            // _width = Configs.GameConfig.GridWidth;
-            // _height = Configs.GameConfig.GridHeight;
+            _cellOffset = Configs.GameConfig.GridCellOffset;
+            _gridWidth = Configs.GameConfig.GridWidth;
+            _gridHeight = Configs.GameConfig.GridHeight;
         }
         
         public void GenerateGrid()
@@ -115,10 +115,9 @@ namespace Sablo.Gameplay.Grid
         private void HighlightShape(Vector2 plugPosition)
         {
             var closestCell = GetClosestCell(plugPosition);
-            if (_currentClosestCell == closestCell) { return; }
-            
-            var shapeTiles = TrayHandler.GetShapeTileIndices();
             _currentClosestCell = closestCell;
+            var shapeTiles = TrayHandler.GetShapeTileIndices();
+           
             for (var i=0; i< shapeTiles.Count ; i++)
             {
                 var index = shapeTiles[i] + closestCell;
