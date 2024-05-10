@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2122265331407776150}
   - component: {fileID: 7280994090682080863}
   m_Layer: 5
-  m_Name: Shape
+  m_Name: Skew-Shape
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60,7 +60,7 @@ MonoBehaviour:
   - {fileID: 1155999493364156959}
   - {fileID: 1155999494269614989}
   _rectTransform: {fileID: 2122265331407776150}
-  _plugTransform: {fileID: 643314355393163897}
+  _plugTransform: {fileID: 1155999494269614988}
 --- !u!1 &8076847134534283805
 GameObject:
   m_ObjectHideFlags: 0
@@ -210,11 +210,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7026010840590635812, guid: 180adff3411534132b296d719e7fa068, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 125
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7026010840590635812, guid: 180adff3411534132b296d719e7fa068, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -46
+      value: 125
       objectReference: {fileID: 0}
     - target: {fileID: 7026010840590635812, guid: 180adff3411534132b296d719e7fa068, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -230,6 +230,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7026010840590635813, guid: 180adff3411534132b296d719e7fa068, type: 3}
       propertyPath: _index.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7026010840590635813, guid: 180adff3411534132b296d719e7fa068, type: 3}
+      propertyPath: _index.y
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7026010840590635815, guid: 180adff3411534132b296d719e7fa068, type: 3}
@@ -331,7 +335,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7026010840590635812, guid: 180adff3411534132b296d719e7fa068, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -46
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7026010840590635812, guid: 180adff3411534132b296d719e7fa068, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -456,7 +460,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7026010840590635812, guid: 180adff3411534132b296d719e7fa068, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 79
+      value: 125
       objectReference: {fileID: 0}
     - target: {fileID: 7026010840590635812, guid: 180adff3411534132b296d719e7fa068, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -472,7 +476,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7026010840590635813, guid: 180adff3411534132b296d719e7fa068, type: 3}
       propertyPath: _index.x
-      value: -1
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7026010840590635813, guid: 180adff3411534132b296d719e7fa068, type: 3}
+      propertyPath: _index.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7026010840590635815, guid: 180adff3411534132b296d719e7fa068, type: 3}
       propertyPath: m_Name
@@ -585,7 +593,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7026010840590635812, guid: 180adff3411534132b296d719e7fa068, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -46
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7026010840590635812, guid: 180adff3411534132b296d719e7fa068, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -601,11 +609,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7026010840590635813, guid: 180adff3411534132b296d719e7fa068, type: 3}
       propertyPath: _index.x
-      value: 1
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 7026010840590635813, guid: 180adff3411534132b296d719e7fa068, type: 3}
       propertyPath: _index.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7026010840590635815, guid: 180adff3411534132b296d719e7fa068, type: 3}
       propertyPath: m_Name

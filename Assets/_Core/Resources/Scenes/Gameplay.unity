@@ -822,13 +822,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _view: {fileID: 651582366}
   _shapeList:
-  - {fileID: 7280994090682080863, guid: 3f0541a561c914073bb3b1bedd152d2d, type: 3}
-  - {fileID: 7280994090682080863, guid: 3f0541a561c914073bb3b1bedd152d2d, type: 3}
+  - {fileID: 7280994090682080863, guid: 5bc6384a7569f494a98e7c7a3637d095, type: 3}
+  - {fileID: 7280994090682080863, guid: cb74c2877c1b2492388364c4eb214baa, type: 3}
+  - {fileID: 7280994090682080863, guid: 2d502e5a1d57043258e8943d5ed130f9, type: 3}
   - {fileID: 7280994090682080863, guid: 3f0541a561c914073bb3b1bedd152d2d, type: 3}
   _spawnTransforms:
   - {fileID: 724968900}
   - {fileID: 165253028}
   - {fileID: 1608563308}
+  - {fileID: 6452363346047349446}
 --- !u!224 &1608563308 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6452363344875063465, guid: 3405afdd4629648538e13b024cdfc667, type: 3}
@@ -993,6 +995,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3405afdd4629648538e13b024cdfc667, type: 3}
+--- !u!224 &6452363346047349446 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5568607429127174791, guid: 3405afdd4629648538e13b024cdfc667, type: 3}
+  m_PrefabInstance: {fileID: 6452363346047349445}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6667360674992127515
 PrefabInstance:
   m_ObjectHideFlags: 0

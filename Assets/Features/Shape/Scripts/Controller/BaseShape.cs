@@ -45,5 +45,10 @@ namespace Sablo.Gameplay.Shape
         {
             return _plugTransform.position;
         }
+
+        public void SetShapePosition(Vector2 position)
+        {
+            _rectTransform.position = position;
+        }
     }
 }

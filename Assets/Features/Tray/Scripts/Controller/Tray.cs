@@ -44,9 +44,9 @@ namespace Sablo.Gameplay.Shape
             //todo: Get data from configs
         }
         
-        void ITray.OnTrayReleased()
+        void ITray.OnTrayReleased(BaseShape shape)
         {
-            
+            GridHandler.OnRelease(shape);
         }
 
         void ITray.OnInputDrag(Vector2 position, Vector2 plugPosition)
@@ -60,4 +60,3 @@ namespace Sablo.Gameplay.Shape
         }
     }
 }
-

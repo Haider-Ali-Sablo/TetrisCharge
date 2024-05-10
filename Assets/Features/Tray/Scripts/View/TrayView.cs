@@ -52,6 +52,7 @@ namespace Sablo.Gameplay.Shape
 
         private void OnTrayReleased()
         {
+            _handler.OnTrayReleased(_currentlySelecedShape);
             _currentlySelecedShape = null;
         }
 

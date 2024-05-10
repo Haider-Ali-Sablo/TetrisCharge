@@ -5,7 +5,6 @@ namespace Sablo.Gameplay.Grid
     public class Cell
     {
         private Tile _defaultTile;
-        private Tile _tile;
         private bool _isOccupied;
         private Vector2Int _index;
         
@@ -34,7 +33,6 @@ namespace Sablo.Gameplay.Grid
         {
             _defaultTile.RemoveHighlight();
         }
-
         
         private void SetCellPosition(Vector2 position) { }
 
@@ -43,21 +41,14 @@ namespace Sablo.Gameplay.Grid
             return _defaultTile.GetPosition();
         }
         
-        public bool IsTileOccupied()
+        public bool IsCellOccupied()
         {
             return _isOccupied;
         }
         
-        public void AddTile(Tile tile)
-        {
-            _tile = tile;
-            SetOccupationState(true);
-        }
-        
-        private void SetOccupationState(bool state)
+        public void SetOccupationState(bool state)
         {
             _isOccupied = state;
         }
-
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using Sablo.Gameplay.Shape;
 using Sablo.UI.Grid;
 using UnityEngine;
@@ -11,6 +12,7 @@ namespace Sablo.Gameplay.Grid
         [SerializeField] private Tile _baseTile;
         [SerializeField] private int _gridWidth;
         [SerializeField] private int _gridHeight;
+        [SerializeField] private float _gridOffset;
       
         private Cell[,] _grid;
         private List<Cell> _highlightedCells;
@@ -70,15 +72,44 @@ namespace Sablo.Gameplay.Grid
                 CellOffset = _cellOffset
             });
         }
+        
+        private bool IsWithinBoundsOfGrid(Vector2 position)
+        {
+            var isWithInBoundsOfGrid = _view.IsWithInBoundsOfGrid(position);
+            return isWithInBoundsOfGrid;
+        }
 
         void IGrid.IsWithinBoundsOfGrid(Vector2 position, Vector2 plugPosition)
         {
-            var isWithInBoundsOfGrid = _view.IsWithInBoundsOfGrid(position);
+            var isWithInBoundsOfGrid = IsWithinBoundsOfGrid(position);
             RemoveHighlightFromPreviousCells();
             if (isWithInBoundsOfGrid)
             {
                 HighlightShape(plugPosition);
             }
+        }
+
+        void IGrid.OnRelease(BaseShape shape)
+        {
+            var plugPosition = shape.GetPlugPosition();
+            var isPlugWithinbounds = IsWithinBoundsOfGrid(plugPosition);
+            if (isPlugWithinbounds && CanPlaceShape())
+            {
+                var cell = _grid[_currentClosestCell.x, _currentClosestCell.y];
+                shape.SetShapePosition(cell.GetCellPosition());
+            }
+        }
+
+        private bool CanPlaceShape()
+        {
+            for (var i = 0; i < _highlightedCells.Count; i++)
+            {
+                if (_highlightedCells[i].IsCellOccupied())
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         private void HighlightShape(Vector2 plugPosition)
@@ -87,16 +118,17 @@ namespace Sablo.Gameplay.Grid
             if (_currentClosestCell == closestCell) { return; }
             
             var shapeTiles = TrayHandler.GetShapeTileIndices();
+            _currentClosestCell = closestCell;
             for (var i=0; i< shapeTiles.Count ; i++)
             {
                 var index = shapeTiles[i] + closestCell;
                 if (index.x >= _gridWidth  || index.y >= _gridHeight || index.x <0 || index.y <0)
                 {
                     return;
-                }   
-                var cell = _grid[index.x, index.y];
-                cell.HighlightTile();
-                _highlightedCells.Add(cell);
+                }
+                    var cell = _grid[index.x, index.y];
+                    cell.HighlightTile();
+                    _highlightedCells.Add(cell);
             }
         }
 
