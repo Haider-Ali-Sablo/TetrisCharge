@@ -1,3 +1,5 @@
+using System;
+using Sablo.Core;
 using UnityEngine;
 
 namespace Sablo.UI.Transition
@@ -5,12 +7,30 @@ namespace Sablo.UI.Transition
     public class TransitionView : BaseView
     {
         [SerializeField] private TransitionViewRefs _viewRefs;
+        private ITransition _handler;
+        
+        public override void Initialize(object model)
+        {
+            _handler = model as ITransition;
+            Register();
+        }
         
         public override void Show()
         {
             base.Show();
             SetViewState(true);
-            PlayTransition();
+        }
+        
+        public void SetProgressState(float progress,Action callback = null)
+        {
+            var fillDelta = Configs.ViewConfig.HomeFillDelta;
+            var fillAmount = Mathf.MoveTowards(_viewRefs.LoadingBarFillImage.fillAmount, progress,
+                fillDelta * Time.deltaTime);
+            _viewRefs.LoadingBarFillImage.fillAmount = fillAmount;
+            if (fillAmount == 1f)
+            {
+                callback?.Invoke();
+            }
         }
 
         public override void Hide()
@@ -22,11 +42,6 @@ namespace Sablo.UI.Transition
         public bool IsTransitionComplete()
         {
             return true;
-        }
-
-        private void PlayTransition()
-        {
-            
         }
     }
 }

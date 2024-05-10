@@ -15,6 +15,6 @@ namespace Sablo.Core
             public static readonly string GameplayScene = "Gameplay";
             public static readonly string LoadingScene = "Loading";
         }
-      
+
     }
 }
