@@ -13,3 +13,7 @@ MonoBehaviour:
   m_Name: ViewConfig
   m_EditorClassIdentifier: 
   ShapeDragSpeed: 200
+  HomeFillDelta: 1
+  HomeBarthreshold: 0.9
+  LoadingFillDelta: 1
+  LoadingBarthreshold: 0.9
