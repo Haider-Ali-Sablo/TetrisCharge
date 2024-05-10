@@ -1,27 +1,41 @@
 using System.Collections;
 using Sablo.Core;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Sablo.UI.Transition
 {
     public class Transition : BaseModule, ITransition
     {
         [SerializeField] private TransitionView _view;
+        private AsyncOperation _sceneLoadingOperation;
+        private float _target;
         
         void ITransition.TransitionToGameplay()
         {
-            var operation = GameFlow.OnPlay();
-            StartCoroutine(PlayTransition(operation));
+            _view.Show();
+            LoadScene();
         }
 
-        private IEnumerator PlayTransition(AsyncOperation operation)
+        private void LoadScene()
         {
-            _view.Show();
-            while (!operation.isDone && !_view.IsTransitionComplete())
+            _sceneLoadingOperation = SceneManager.LoadSceneAsync(Constants.SceneName.GameplayScene);
+            _sceneLoadingOperation.allowSceneActivation = false;
+            StartCoroutine( SetProgressState());
+        }
+
+        private IEnumerator SetProgressState()
+        {
+            while (!_sceneLoadingOperation.isDone)
             {
+                _target =  Mathf.Clamp01(_sceneLoadingOperation.progress/ Configs.ViewConfig.HomeBarthreshold);
+                _view.SetProgressState(_target, ActivateScene);
                 yield return null;
             }
-            operation.allowSceneActivation = true;
+        }
+        private void ActivateScene( )
+        {
+            _sceneLoadingOperation.allowSceneActivation = true;
         }
     }
 }
