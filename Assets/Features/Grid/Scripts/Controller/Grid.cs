@@ -16,8 +16,8 @@ namespace Sablo.Gameplay.Grid
         private float _column0ffset;
         private Cell[,] _grid;
         private List<Cell> _highlightedCells;
+        private List<Cell> _currentlyOccupiedCells;
         private Vector2Int _currentClosestCell;
-        private BaseShape _currentlyPlacedShape;
 
         
         public ITray TrayHandler { private get; set; }
@@ -81,9 +81,9 @@ namespace Sablo.Gameplay.Grid
             return isWithInBoundsOfGrid;
         }
 
-        void IGrid.IsWithinBoundsOfGrid(Vector2 position, Vector2 plugPosition)
+        void IGrid.IsWithinBoundsOfGrid(Vector2 shapePosition, Vector2 plugPosition)
         {
-            var isWithInBoundsOfGrid = IsWithinBoundsOfGrid(position);
+            var isWithInBoundsOfGrid = IsWithinBoundsOfGrid(shapePosition);
             RemoveHighlightFromPreviousCells();
             if (isWithInBoundsOfGrid)
             {
@@ -100,25 +100,25 @@ namespace Sablo.Gameplay.Grid
             {
                 var cell = _grid[_currentClosestCell.x, _currentClosestCell.y];
                 shape.SetShapePosition(cell.GetCellPosition());
+                shape.SetPlacementState(true);
+                shape.SetPlacementPoint(_currentClosestCell);
+                SetOccupationStateOfCells(true);
+                RemoveHighlightFromPreviousCells();
             }
         }
-        
+
+        public void OnReselectionOfShape(List<Vector2Int> shapeTiles)
+        {
+            for (var i = 0; i < shapeTiles.Count; i++)
+            {
+                var tileIndex = shapeTiles[i];
+                _grid[tileIndex.x,tileIndex.y].SetOccupationState(false);
+            }
+        }
+
         private bool CanPlaceShape(int shapeTiles)
         {
             return _highlightedCells.Count == shapeTiles;
-        }
-
-        private bool IsAnyCellOccupied()
-        {
-            var isOccupied = false;
-            for (var i = 0; i < _highlightedCells.Count; i++)
-            {
-                if (_highlightedCells[i].IsCellOccupied())
-                {
-                    isOccupied = true;
-                }
-            }
-            return isOccupied;
         }
 
         private void SetOccupationStateOfCells(bool state)
@@ -146,6 +146,7 @@ namespace Sablo.Gameplay.Grid
                 var cell = _grid[index.x, index.y];
                 if (cell.IsCellOccupied())
                 {
+                    _highlightedCells = new List<Cell>(); 
                     return;
                 }
                 _highlightedCells.Add(cell);
@@ -158,7 +159,6 @@ namespace Sablo.Gameplay.Grid
             for (var i = 0; i < _highlightedCells.Count; i++)
             {
                 _highlightedCells[i].HighlightTile();
-                _highlightedCells[i].SetOccupationState(true);
             }
         }
 
@@ -169,7 +169,6 @@ namespace Sablo.Gameplay.Grid
             for (var i = 0; i < _highlightedCells.Count; i++)
             {
                 _highlightedCells[i].RemoveHighlightTile();
-                _highlightedCells[i].SetOccupationState(false);
             }
             _highlightedCells = new List<Cell>();
         }

@@ -60,6 +60,13 @@ namespace Sablo.Gameplay.Shape
         {
             var shape = IsWithinBoundsOfShape(eventData.position);
             _currentlySelecedShape = shape;
+            var placementStatus = shape.HasBeenPlaced();
+            if (placementStatus)
+            {
+                var shapeTiles = shape.GetTileIndex();
+                var anchorPoint = shape.GetPlacementPoint();
+                _handler.OnReselectionOfShape(shapeTiles, anchorPoint);
+            }
         }
 
         public void OnDrag(PointerEventData eventData)

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading;
 using Sablo.Gameplay.Grid;
 using UnityEngine;
 
@@ -52,6 +53,17 @@ namespace Sablo.Gameplay.Shape
         void ITray.OnInputDrag(Vector2 position, Vector2 plugPosition)
         {
             GridHandler.IsWithinBoundsOfGrid(position, plugPosition);
+        }
+
+        void ITray.OnReselectionOfShape(List<Vector2Int> shapeTiles, Vector2Int placementPoint)
+        {
+            var cellsOnGrid = new List<Vector2Int>();
+            for (var i = 0; i < shapeTiles.Count; i++)
+            {
+                var index = shapeTiles[i] + placementPoint;
+                cellsOnGrid.Add(index);
+            }
+            GridHandler.OnReselectionOfShape(cellsOnGrid);
         }
 
         public List<Vector2Int> GetShapeTileIndices()
