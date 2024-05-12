@@ -48,5 +48,15 @@ namespace Sablo.Gameplay.Grid
         {
             _isOccupied = state;
         }
+
+        public void ActivateSwitch()
+        {
+            _defaultTile.ActivateSwitch();
+        }
+
+        public bool HasActiveSwitch()
+        {
+            return _defaultTile.HasActiveSwitch();
+        }
     }
 }

@@ -16,3 +16,7 @@ MonoBehaviour:
   GridHeight: 4
   GridCellOffsetRow: 155
   GridCellOffsetColumn: 152
+  SwitchesOnGrid:
+  - {x: 2, y: 3}
+  - {x: 1, y: 3}
+  - {x: 0, y: 0}

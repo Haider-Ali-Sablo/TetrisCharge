@@ -1,14 +1,13 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Sablo.Gameplay.Grid
 {
     public class Tile: MonoBehaviour
     {
         [SerializeField] private RectTransform _rectTransform;
-        [SerializeField] private Button _tileButton;
         [SerializeField] private Vector2Int _index;
         [SerializeField] private GameObject _overlayImage;
+        [SerializeField] private GameObject _switch;
         public float height => _rectTransform.rect.height;
         
         public void Initialize()
@@ -39,6 +38,16 @@ namespace Sablo.Gameplay.Grid
         public Vector2 GetPosition()
         {
             return _rectTransform.position;
+        }
+
+        public void ActivateSwitch()
+        {
+            _switch.SetActive(true);
+        }
+
+        public bool HasActiveSwitch()
+        {
+            return _switch.activeSelf;
         }
     }
 }

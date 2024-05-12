@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public partial class GameConfig
@@ -7,4 +8,5 @@ public partial class GameConfig
     public int GridHeight;
     public float GridCellOffsetRow;
     public float GridCellOffsetColumn;
+    public List<Vector2Int> SwitchesOnGrid;
 }

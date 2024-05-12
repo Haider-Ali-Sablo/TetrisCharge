@@ -18,6 +18,7 @@ namespace Sablo.Gameplay.Grid
         private List<Cell> _highlightedCells;
         private List<Cell> _currentlyOccupiedCells;
         private Vector2Int _currentClosestCell;
+        private List<Vector2Int> _switchesOnGrid;
 
         
         public ITray TrayHandler { private get; set; }
@@ -28,6 +29,7 @@ namespace Sablo.Gameplay.Grid
             SetData();
             InitializeView();
             GenerateGrid();
+            ActivateSwitchesOnGrid();
         }
         
         private void SetData()
@@ -38,15 +40,16 @@ namespace Sablo.Gameplay.Grid
             _column0ffset = Configs.GameConfig.GridCellOffsetColumn;
             _gridWidth = Configs.GameConfig.GridWidth;
             _gridHeight = Configs.GameConfig.GridHeight;
+            _switchesOnGrid = Configs.GameConfig.SwitchesOnGrid;
         }
         
         public void GenerateGrid()
         {
             _grid = new Cell[_gridWidth, _gridHeight];
             
-            for (int rowIndex = _gridWidth-1; rowIndex >=0 ; rowIndex--)
+            for (var rowIndex = _gridWidth-1; rowIndex >=0 ; rowIndex--)
             {
-                for (int columnIndex = _gridHeight-1; columnIndex >=0 ; columnIndex--)
+                for (var columnIndex = _gridHeight-1; columnIndex >=0 ; columnIndex--)
                 {
                     var xPos = rowIndex * _row0ffset;
                     var yPos = columnIndex * _column0ffset;
@@ -64,6 +67,16 @@ namespace Sablo.Gameplay.Grid
             cell.Initialize(position, tile, new Vector2Int(rowIndex, columnIndex));
             return cell;
         }
+
+        private void ActivateSwitchesOnGrid()
+        {
+            for (var index = 0; index < _switchesOnGrid.Count; index++)
+            {
+                var switchIndex = _switchesOnGrid[index];
+                var cell = _grid[switchIndex.x, switchIndex.y];
+                cell.ActivateSwitch();
+            }
+        }   
         
         private void InitializeView()
         {
