@@ -19,9 +19,16 @@ namespace Sablo.Gameplay.Grid
         private List<Cell> _currentlyOccupiedCells;
         private Vector2Int _currentClosestCell;
         private List<Vector2Int> _switchesOnGrid;
+        private LevelGenerationData _levelData;
 
         
         public ITray TrayHandler { private get; set; }
+
+        public override void PreInitialize()
+        {
+            var currentLevel = PlayerPrefs.GetInt(Constants.LevelPrefKeys.CurrentLevel, 1);
+            _levelData = Configs.LevelConfig.LevelData[currentLevel];
+        }
         
         public override void Initialize()
         {
@@ -38,9 +45,9 @@ namespace Sablo.Gameplay.Grid
             _currentClosestCell = new Vector2Int();
             _row0ffset = Configs.GameConfig.GridCellOffsetRow;
             _column0ffset = Configs.GameConfig.GridCellOffsetColumn;
-            _gridWidth = Configs.GameConfig.GridWidth;
-            _gridHeight = Configs.GameConfig.GridHeight;
-            _switchesOnGrid = Configs.GameConfig.SwitchesOnGrid;
+            _gridWidth = _levelData.GridWidth;
+            _gridHeight = _levelData.GridHeight;
+            _switchesOnGrid = _levelData.SwitchesOnGrid;
         }
         
         public void GenerateGrid()
