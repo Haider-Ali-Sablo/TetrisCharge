@@ -2,8 +2,7 @@ using UnityEngine;
 
 public partial class GameConfig
 {
-    [Header("Grid")] 
-    public int GridWidth;
-    public int GridHeight;
-    public float CellOffsetMultiplier;
+    [Header("Grid")]
+    public float GridCellOffsetRow;
+    public float GridCellOffsetColumn;
 }

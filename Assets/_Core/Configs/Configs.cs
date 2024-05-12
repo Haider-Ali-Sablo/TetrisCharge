@@ -5,5 +5,6 @@ namespace Sablo.Core
         public static AppConfig AppConfig;
         public static GameConfig GameConfig;
         public static ViewConfig ViewConfig;
+        public static LevelConfig LevelConfig;
     }
 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.3709992, g: 0.37852928, b: 0.35740113, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311918, g: 0.3807396, b: 0.35872662, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -231,6 +231,7 @@ MonoBehaviour:
   _appConfigs: {fileID: 11400000, guid: d1a804bf5a02d43fe87891ab07f16cb9, type: 2}
   _gameConfig: {fileID: 11400000, guid: 0e4f70ae26eb140c68c4eb1f9d135bcf, type: 2}
   _viewConfig: {fileID: 11400000, guid: 378926f86216f4babb84de47ae04d850, type: 2}
+  _levelConfig: {fileID: 11400000, guid: 8aba4d7bbd4ca4cd1971bfa5c2eca2c3, type: 2}
 --- !u!4 &124905890
 Transform:
   m_ObjectHideFlags: 0
@@ -424,7 +425,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadingBarFillImage: {fileID: 586386892}
-  LoadingFillDelta: 1
 --- !u!1 &1110263566
 GameObject:
   m_ObjectHideFlags: 0

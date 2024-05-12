@@ -46,7 +46,6 @@ namespace Sablo.Core
                 }
             }
         }
-        
 
         public AsyncOperation OnPlay()
         {

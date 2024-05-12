@@ -1,3 +1,4 @@
+using log4net.Core;
 using UnityEngine;
 using UnityEditor;
 
@@ -39,6 +40,18 @@ namespace Sablo.Core
                 return;
             }
             Debug.LogError("ViewConfig asset not found!");
+        }
+        
+        [MenuItem("Sablo/Configs/LevelConfig")]
+        private static void ShowLevelConfig()
+        {
+            var levelConfig = Resources.Load<LevelConfig>(Constants.ConfigPath.LevelConfigsPath);
+            if (levelConfig != null)
+            {
+                Selection.activeObject = levelConfig;
+                return;
+            }
+            Debug.LogError("LevelConfig asset not found!");
         }
     }
 }

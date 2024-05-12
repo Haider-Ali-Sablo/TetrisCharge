@@ -5,14 +5,11 @@ namespace Sablo.Gameplay.Grid
     public class Cell
     {
         private Tile _defaultTile;
-        private Tile _tile;
         private bool _isOccupied;
         private Vector2Int _index;
-        private Vector2 _position;
         
         public void Initialize(Vector2 position, Tile _defaultTile, Vector2Int index)
         {
-            SetCellPosition(position);
             AddDefaultTile(_defaultTile);
             SetIndex(index);
         }
@@ -26,27 +23,40 @@ namespace Sablo.Gameplay.Grid
         {
             _defaultTile = tile;
         }
-        
-        private void SetCellPosition(Vector2 position)
+
+        public void HighlightTile()
         {
-            _position = position;
+            _defaultTile.HighlightTile();
         }
         
-        public bool IsTileOccupied()
+        public void RemoveHighlightTile()
+        {
+            _defaultTile.RemoveHighlight();
+        }
+
+        public Vector2 GetCellPosition()
+        {
+            return _defaultTile.GetPosition();
+        }
+        
+        public bool IsCellOccupied()
         {
             return _isOccupied;
         }
         
-        public void AddTile(Tile tile)
-        {
-            _tile = tile;
-            SetOccupationState(true);
-        }
-        
-        private void SetOccupationState(bool state)
+        public void SetOccupationState(bool state)
         {
             _isOccupied = state;
         }
 
+        public void ActivateSwitch()
+        {
+            _defaultTile.ActivateSwitch();
+        }
+
+        public bool HasActiveSwitch()
+        {
+            return _defaultTile.HasActiveSwitch();
+        }
     }
 }

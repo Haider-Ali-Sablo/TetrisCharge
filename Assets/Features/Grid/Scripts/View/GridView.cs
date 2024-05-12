@@ -17,7 +17,7 @@ namespace Sablo.UI.Grid
 
         private void CalculateStartingPosition()
         {
-            var screenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
+            var screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2);
             _startingPosition = screenCenter - new Vector2(_model.GridWidth* _model.CellOffset / 2, _model.GridHeight * _model.CellOffset / 2);
         }
 
@@ -26,10 +26,15 @@ namespace Sablo.UI.Grid
             position.x += _startingPosition.x;
             position.y += _startingPosition.y;
             
-            var tile = Instantiate(_refs.DefaultTile, position, Quaternion.identity, _refs.SpawnPoint);
+            var tile = Instantiate(_refs.DefaultTile, position, Quaternion.identity, _refs.GridRectTransform);
             tile.Initialize();
             return tile;
         }
-        
+
+        public bool IsWithInBoundsOfGrid(Vector2 position)
+        {
+            var isWithinBounds = RectTransformUtility.RectangleContainsScreenPoint(_refs.GridRectTransform, position);
+            return isWithinBounds;
+        }
     }
 }
