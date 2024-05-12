@@ -46,7 +46,7 @@ namespace Sablo.Gameplay.Shape
         
         void ITray.OnTrayReleased(BaseShape shape)
         {
-            GridHandler.OnRelease(shape);
+            GridHandler.OnTrayRelease(shape);
         }
 
         void ITray.OnInputDrag(Vector2 position, Vector2 plugPosition)

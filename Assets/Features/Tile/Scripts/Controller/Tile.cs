@@ -27,7 +27,7 @@ namespace Sablo.Gameplay.Grid
         }
         private void Register()
         {
-            _tileButton.onClick.AddListener(OnTileClicked);
+            // _tileButton.onClick.AddListener(OnTileClicked);
         }
 
         private void OnTileClicked()

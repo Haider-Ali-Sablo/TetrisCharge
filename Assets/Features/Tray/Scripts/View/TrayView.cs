@@ -75,7 +75,7 @@ namespace Sablo.Gameplay.Shape
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            OnTrayReleased();
+            if(_currentlySelecedShape!=null){  OnTrayReleased();}
         }
 
         public List<Vector2Int> GetTilesIndicesOfShape()

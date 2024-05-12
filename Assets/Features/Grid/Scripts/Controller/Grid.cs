@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq.Expressions;
 using Sablo.Core;
 using Sablo.Gameplay.Shape;
 using Sablo.UI.Grid;
@@ -13,10 +12,12 @@ namespace Sablo.Gameplay.Grid
         [SerializeField] private Tile _baseTile;
         private int _gridWidth;
         private int _gridHeight;
-        private float _cellOffset;
+        private float _row0ffset;
+        private float _column0ffset;
         private Cell[,] _grid;
         private List<Cell> _highlightedCells;
         private Vector2Int _currentClosestCell;
+        private BaseShape _currentlyPlacedShape;
 
         
         public ITray TrayHandler { private get; set; }
@@ -33,7 +34,8 @@ namespace Sablo.Gameplay.Grid
         {
             _highlightedCells = new List<Cell>();
             _currentClosestCell = new Vector2Int();
-            _cellOffset = Configs.GameConfig.GridCellOffset;
+            _row0ffset = Configs.GameConfig.GridCellOffsetRow;
+            _column0ffset = Configs.GameConfig.GridCellOffsetColumn;
             _gridWidth = Configs.GameConfig.GridWidth;
             _gridHeight = Configs.GameConfig.GridHeight;
         }
@@ -42,12 +44,12 @@ namespace Sablo.Gameplay.Grid
         {
             _grid = new Cell[_gridWidth, _gridHeight];
             
-            for (int rowIndex = 0; rowIndex < _gridWidth; rowIndex++)
+            for (int rowIndex = _gridWidth-1; rowIndex >=0 ; rowIndex--)
             {
-                for (int columnIndex = 0; columnIndex < _gridHeight; columnIndex++)
+                for (int columnIndex = _gridHeight-1; columnIndex >=0 ; columnIndex--)
                 {
-                    var xPos = rowIndex * _cellOffset;
-                    var yPos = columnIndex * _cellOffset;
+                    var xPos = rowIndex * _row0ffset;
+                    var yPos = columnIndex * _column0ffset;
             
                     var position = new Vector2(xPos, yPos);
                     _grid[rowIndex, columnIndex] = CreateNewCell(rowIndex, columnIndex, position);
@@ -69,7 +71,7 @@ namespace Sablo.Gameplay.Grid
             {
                 GridWidth = _gridWidth,
                 GridHeight = _gridHeight,
-                CellOffset = _cellOffset
+                CellOffset = _row0ffset
             });
         }
         
@@ -89,27 +91,42 @@ namespace Sablo.Gameplay.Grid
             }
         }
 
-        void IGrid.OnRelease(BaseShape shape)
+        void IGrid.OnTrayRelease(BaseShape shape)
         {
             var plugPosition = shape.GetPlugPosition();
             var isPlugWithinbounds = IsWithinBoundsOfGrid(plugPosition);
-            if (isPlugWithinbounds && CanPlaceShape())
+            var tileCount = shape.GetTileIndex().Count;
+            if (isPlugWithinbounds && CanPlaceShape(tileCount))
             {
                 var cell = _grid[_currentClosestCell.x, _currentClosestCell.y];
                 shape.SetShapePosition(cell.GetCellPosition());
             }
         }
-
-        private bool CanPlaceShape()
+        
+        private bool CanPlaceShape(int shapeTiles)
         {
+            return _highlightedCells.Count == shapeTiles;
+        }
+
+        private bool IsAnyCellOccupied()
+        {
+            var isOccupied = false;
             for (var i = 0; i < _highlightedCells.Count; i++)
             {
                 if (_highlightedCells[i].IsCellOccupied())
                 {
-                    return false;
+                    isOccupied = true;
                 }
             }
-            return true;
+            return isOccupied;
+        }
+
+        private void SetOccupationStateOfCells(bool state)
+        {
+            for (var i = 0; i < _highlightedCells.Count; i++)
+            {
+                _highlightedCells[i].SetOccupationState(state);
+            }
         }
 
         private void HighlightShape(Vector2 plugPosition)
@@ -121,13 +138,27 @@ namespace Sablo.Gameplay.Grid
             for (var i=0; i< shapeTiles.Count ; i++)
             {
                 var index = shapeTiles[i] + closestCell;
-                if (index.x >= _gridWidth  || index.y >= _gridHeight || index.x <0 || index.y <0)
+                if (index.x >= _gridWidth || index.y >= _gridHeight || index.x < 0 || index.y < 0)
+                {
+                    _highlightedCells = new List<Cell>(); 
+                    return;
+                }
+                var cell = _grid[index.x, index.y];
+                if (cell.IsCellOccupied())
                 {
                     return;
                 }
-                    var cell = _grid[index.x, index.y];
-                    cell.HighlightTile();
-                    _highlightedCells.Add(cell);
+                _highlightedCells.Add(cell);
+            }
+            HighlightCells();
+        }
+        
+        private void HighlightCells()
+        {
+            for (var i = 0; i < _highlightedCells.Count; i++)
+            {
+                _highlightedCells[i].HighlightTile();
+                _highlightedCells[i].SetOccupationState(true);
             }
         }
 
@@ -138,6 +169,7 @@ namespace Sablo.Gameplay.Grid
             for (var i = 0; i < _highlightedCells.Count; i++)
             {
                 _highlightedCells[i].RemoveHighlightTile();
+                _highlightedCells[i].SetOccupationState(false);
             }
             _highlightedCells = new List<Cell>();
         }

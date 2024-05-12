@@ -33,8 +33,6 @@ namespace Sablo.Gameplay.Grid
         {
             _defaultTile.RemoveHighlight();
         }
-        
-        private void SetCellPosition(Vector2 position) { }
 
         public Vector2 GetCellPosition()
         {
