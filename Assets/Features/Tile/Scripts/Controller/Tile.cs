@@ -21,18 +21,9 @@ namespace Sablo.Gameplay.Grid
             return _index;
         }
         
-        private void Start()
-        {
-            Register();
-        }
         private void Register()
         {
-            // _tileButton.onClick.AddListener(OnTileClicked);
-        }
-
-        private void OnTileClicked()
-        {
-            
+           
         }
 
         public void HighlightTile()
@@ -44,13 +35,10 @@ namespace Sablo.Gameplay.Grid
         {
             _overlayImage.SetActive(false);
         }
-        
 
         public Vector2 GetPosition()
         {
             return _rectTransform.position;
         }
-        
     }
-    
 }
