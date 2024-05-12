@@ -486,11 +486,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!224 &564473082 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 5197483193066815161, guid: 4612165cbce9f4cdfa12c3d21f322c4e, type: 3}
-  m_PrefabInstance: {fileID: 6667360674992127515}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &647546338
 GameObject:
   m_ObjectHideFlags: 0
@@ -774,9 +769,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _view: {fileID: 2026168301}
   _baseTile: {fileID: 7026010840590635813, guid: 180adff3411534132b296d719e7fa068, type: 3}
-  _gridWidth: 6
-  _gridHeight: 6
-  _gridOffset: 140
 --- !u!1 &1423421030
 GameObject:
   m_ObjectHideFlags: 0
@@ -1008,34 +1000,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 647546339}
     m_Modifications:
-    - target: {fileID: 3177317775818361156, guid: 4612165cbce9f4cdfa12c3d21f322c4e, type: 3}
-      propertyPath: GridRectTransform
-      value: 
-      objectReference: {fileID: 564473082}
-    - target: {fileID: 5197483193066815161, guid: 4612165cbce9f4cdfa12c3d21f322c4e, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5197483193066815161, guid: 4612165cbce9f4cdfa12c3d21f322c4e, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5197483193066815161, guid: 4612165cbce9f4cdfa12c3d21f322c4e, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5197483193066815161, guid: 4612165cbce9f4cdfa12c3d21f322c4e, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5197483193066815161, guid: 4612165cbce9f4cdfa12c3d21f322c4e, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 800
-      objectReference: {fileID: 0}
-    - target: {fileID: 5197483193066815161, guid: 4612165cbce9f4cdfa12c3d21f322c4e, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 800
-      objectReference: {fileID: 0}
     - target: {fileID: 6667360673520198128, guid: 4612165cbce9f4cdfa12c3d21f322c4e, type: 3}
       propertyPath: m_Name
       value: GridView
