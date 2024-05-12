@@ -7,6 +7,7 @@ namespace Sablo.Core
             public static readonly string AppConfigPath = "AppConfig";
             public static readonly string GameConfigsPath = "GameConfig";
             public static readonly string ViewConfigsPath = "ViewConfig";
+            public static readonly string LevelConfigsPath = "LevelConfig";
         }
 
         public struct SceneName
