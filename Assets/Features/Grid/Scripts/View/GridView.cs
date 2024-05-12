@@ -1,3 +1,4 @@
+using Sablo.Core;
 using Sablo.Gameplay.Grid;
 using UnityEngine;
 
@@ -14,12 +15,17 @@ namespace Sablo.UI.Grid
             _model = model as GridViewDataModel;
             CalculateStartingPosition();
         }
-
+        
         private void CalculateStartingPosition()
         {
-            var screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2);
-            _startingPosition = screenCenter - new Vector2(_model.GridWidth* _model.CellOffset / 2, _model.GridHeight * _model.CellOffset / 2);
+            var gridWidthPixels = _model.GridWidth * _model.CellOffset;
+            var gridHeightPixels = _model.GridHeight * _model.CellOffset;
+            var heightFactor = Configs.GameConfig.HeightDividingFactor;
+            var widthFactor = Configs.GameConfig.WidthDividingFactor;
+            
+            _startingPosition = new Vector2(Screen.width / widthFactor - gridWidthPixels / widthFactor, Screen.height / heightFactor - gridHeightPixels / heightFactor);
         }
+
 
         public Tile SpawnTile(Vector2 position)
         {

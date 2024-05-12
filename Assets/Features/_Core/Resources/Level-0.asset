@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b99cea39720d41fd9724e071f90adac, type: 3}
   m_Name: Level-0
   m_EditorClassIdentifier: 
-  GridWidth: 5
+  GridWidth: 7
   GridHeight: 5
   SwitchesOnGrid:
   - {x: 3, y: 3}

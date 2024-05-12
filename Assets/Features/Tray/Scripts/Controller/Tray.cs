@@ -28,8 +28,7 @@ namespace Sablo.Gameplay.Shape
 
         private void SetData()
         {
-            var currentLevel =
-                PlayerPrefs.GetInt(Constants.LevelPrefKeys.CurrentLevel, Configs.LevelConfig.DefaultLevel);
+            var currentLevel = PlayerPrefs.GetInt(Constants.LevelPrefKeys.CurrentLevel, Configs.LevelConfig.DefaultLevel);
             _shapeList = Configs.LevelConfig.LevelData[currentLevel].ShapeTypes;
             SetSpawnPoints();
         }
