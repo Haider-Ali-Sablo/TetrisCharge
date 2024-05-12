@@ -293,7 +293,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -814,11 +814,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _view: {fileID: 651582366}
-  _shapeList:
-  - {fileID: 7280994090682080863, guid: 5bc6384a7569f494a98e7c7a3637d095, type: 3}
-  - {fileID: 7280994090682080863, guid: cb74c2877c1b2492388364c4eb214baa, type: 3}
-  - {fileID: 7280994090682080863, guid: 2d502e5a1d57043258e8943d5ed130f9, type: 3}
-  - {fileID: 7280994090682080863, guid: 3f0541a561c914073bb3b1bedd152d2d, type: 3}
   _spawnTransforms:
   - {fileID: 724968900}
   - {fileID: 165253028}
@@ -1000,6 +995,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 647546339}
     m_Modifications:
+    - target: {fileID: 1202073963399719841, guid: 4612165cbce9f4cdfa12c3d21f322c4e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.15640259
+      objectReference: {fileID: 0}
+    - target: {fileID: 4965220334864742175, guid: 4612165cbce9f4cdfa12c3d21f322c4e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -1.8876953
+      objectReference: {fileID: 0}
     - target: {fileID: 6667360673520198128, guid: 4612165cbce9f4cdfa12c3d21f322c4e, type: 3}
       propertyPath: m_Name
       value: GridView
@@ -1070,7 +1073,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6667360673520198135, guid: 4612165cbce9f4cdfa12c3d21f322c4e, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -1130
       objectReference: {fileID: 0}
     - target: {fileID: 6667360673520198135, guid: 4612165cbce9f4cdfa12c3d21f322c4e, type: 3}
       propertyPath: m_AnchoredPosition.y
