@@ -9,6 +9,7 @@ namespace Sablo.Gameplay.Shape
         [SerializeField] protected List<Tile> _tiles;
         [SerializeField] private RectTransform _rectTransform;
         [SerializeField] private RectTransform _plugTransform;
+        [SerializeField] private RectTransform _shapeBounds;
         private List<Vector2Int> _tileIndex;
         private bool _hasBeenPlaced;
         private Vector2Int _placementPoint;
@@ -73,6 +74,10 @@ namespace Sablo.Gameplay.Shape
         {
             _hasBeenPlaced = state;
         }
-        
+
+        public RectTransform GetShapeBounds()
+        {
+            return _shapeBounds;
+        }
     }
 }

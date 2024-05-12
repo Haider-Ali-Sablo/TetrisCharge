@@ -40,7 +40,7 @@ namespace Sablo.Gameplay.Shape
         {
             for (var index = 0; index < _shapes.Count; index++)
             {
-                var rectTransform = _shapes[index].GetRectTransform();
+                var rectTransform = _shapes[index].GetShapeBounds();
                 var isWithinBounds = RectTransformUtility.RectangleContainsScreenPoint(rectTransform, position);
                 if (isWithinBounds)
                 {
