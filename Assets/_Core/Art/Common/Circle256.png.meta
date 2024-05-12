@@ -137,7 +137,7 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 126, y: 126, z: 126, w: 126}
       outline: []
       physicsShape: []
@@ -145,6 +145,27 @@ TextureImporter:
       bones: []
       spriteID: 0a6523d418c274c81a6f03b17cfcaae2
       internalID: -919534501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Circle256_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 126
+        width: 256
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 126, y: 0, z: 126, w: 126}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 23e9802a7421d4378839cde15f528bfd
+      internalID: -310903144
       vertices: []
       indices: 
       edges: []
@@ -161,6 +182,7 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       Circle256_0: -919534501
+      Circle256_1: -310903144
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
