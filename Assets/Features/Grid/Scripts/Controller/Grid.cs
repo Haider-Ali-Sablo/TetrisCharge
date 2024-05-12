@@ -145,9 +145,11 @@ namespace Sablo.Gameplay.Grid
         private void HighlightShape(Vector2 plugPosition)
         {
             var closestCell = GetClosestCell(plugPosition);
-            _currentClosestCell = closestCell;
+            if (!CheckIfCellHasActiveSwitch(closestCell)) { return;}
+            
             var shapeTiles = TrayHandler.GetShapeTileIndices();
-           
+            _currentClosestCell = closestCell;
+            
             for (var i=0; i< shapeTiles.Count ; i++)
             {
                 var index = shapeTiles[i] + closestCell;
@@ -166,6 +168,13 @@ namespace Sablo.Gameplay.Grid
             }
             HighlightCells();
         }
+
+        private bool CheckIfCellHasActiveSwitch(Vector2Int index)
+        {
+            var cell = _grid[index.x, index.y];
+            return cell.HasActiveSwitch();
+        }
+        
         
         private void HighlightCells()
         {
