@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b01f242874c0a4505bf00d10dd5c12cc, type: 3}
   m_Name: ViewConfig
   m_EditorClassIdentifier: 
-  ShapeDragSpeed: 200
   HomeFillDelta: 1
   HomeBarthreshold: 0.9
+  ChargingAnimationDuration: 0.25
+  BatteryEmptyTargetFillValue: 0.075
+  BatteryFullTargetFillValue: 1
+  ShapeDragSpeed: 200
   LoadingFillDelta: 1
   LoadingBarthreshold: 0.9

@@ -59,7 +59,12 @@ namespace Sablo.Gameplay.Shape
         public void OnPointerDown(PointerEventData eventData)
         {
             var shape = IsWithinBoundsOfShape(eventData.position);
+            if (shape == null)
+            {
+                return;
+            }
             _currentlySelecedShape = shape;
+            shape.SetPlugState(true);
             var placementStatus = shape.HasBeenPlaced();
             if (placementStatus)
             {

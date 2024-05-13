@@ -121,6 +121,7 @@ namespace Sablo.Gameplay.Grid
                 var cell = _grid[_currentClosestCell.x, _currentClosestCell.y];
                 shape.SetShapePosition(cell.GetCellPosition());
                 shape.SetPlacementState(true);
+                shape.SetPlugState(false);
                 shape.SetPlacementPoint(_currentClosestCell);
                 SetOccupationStateOfCells(true);
                 RemoveHighlightFromPreviousCells();
