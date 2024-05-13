@@ -1,15 +1,17 @@
 using System.Collections.Generic;
 using Sablo.Gameplay.Grid;
 using UnityEngine;
-
+using Sablo.Gameplay.PhoneCharge;
 namespace Sablo.Gameplay.Shape
 {
     public class BaseShape : MonoBehaviour
     {
         [SerializeField] protected List<Tile> _tiles;
-        [SerializeField] private RectTransform _rectTransform;
+        [SerializeField] private RectTransform _chargerTransform;
         [SerializeField] private RectTransform _plugTransform;
         [SerializeField] private RectTransform _shapeBounds;
+        [SerializeField] private Phone _phone;
+        
         private List<Vector2Int> _tileIndex;
         private bool _hasBeenPlaced;
         private Vector2Int _placementPoint;
@@ -17,6 +19,12 @@ namespace Sablo.Gameplay.Shape
         public virtual void Initialize()
         {
             SetIndexData();
+            InitializePhone();
+        }
+
+        private void InitializePhone()
+        {
+            _phone.Initialize();
         }
 
         private void SetIndexData()
@@ -37,14 +45,9 @@ namespace Sablo.Gameplay.Shape
         
         public void MoveToPosition(Vector2 targetPosition)
         {
-            _rectTransform.position = targetPosition;
+            _chargerTransform.position = targetPosition;
         }
-
-        public RectTransform GetRectTransform()
-        {
-            return _rectTransform;
-        }
-
+        
         public Vector2 GetPlugPosition()
         {
             return _plugTransform.position;
@@ -52,7 +55,7 @@ namespace Sablo.Gameplay.Shape
 
         public void SetShapePosition(Vector2 position)
         {
-            _rectTransform.position = position;
+            _chargerTransform.position = position;
         }
 
         public bool HasBeenPlaced()
@@ -78,6 +81,20 @@ namespace Sablo.Gameplay.Shape
         public RectTransform GetShapeBounds()
         {
             return _shapeBounds;
+        }
+
+        public void SetPlugState(bool state)
+        {
+            _plugTransform.gameObject.SetActive(state);
+            if (!state)
+            {
+                _phone.ChargeBattery();
+            }
+            else
+            {
+                _phone.DrainBattery();
+            }
+           
         }
     }
 }
