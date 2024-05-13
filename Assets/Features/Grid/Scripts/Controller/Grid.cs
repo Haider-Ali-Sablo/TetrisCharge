@@ -91,7 +91,7 @@ namespace Sablo.Gameplay.Grid
             {
                 GridWidth = _gridWidth,
                 GridHeight = _gridHeight,
-                CellOffset = _row0ffset
+                CellOffset = _column0ffset
             });
         }
         
