@@ -43,8 +43,8 @@ namespace Sablo.Gameplay.Grid
         {
             _highlightedCells = new List<Cell>();
             _currentClosestCell = new Vector2Int();
-            _row0ffset = Configs.GameConfig.GridCellOffsetRow;
-            _column0ffset = Configs.GameConfig.GridCellOffsetColumn;
+            _row0ffset = _baseTile.width;
+            _column0ffset = _baseTile.height;
             _gridWidth = _levelData.GridWidth;
             _gridHeight = _levelData.GridHeight;
             _switchesOnGrid = _levelData.SwitchesOnGrid;
