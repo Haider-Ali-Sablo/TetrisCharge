@@ -135,7 +135,7 @@ namespace Sablo.Gameplay.Grid
 
         private void CheckIfLevelCompleted()
         {
-            if (_shapesOnGrid == TrayHandler.GetShapeCount())
+            if (TrayHandler.CheckIfAllShapesHaveBeenPlaced())
             {
                 LevelHandler.OnLevelComplete();
             }

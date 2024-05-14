@@ -10,5 +10,7 @@ namespace Sablo.Gameplay.Shape
         void OnReselectionOfShape(List<Vector2Int> shapeTiles, Vector2Int placementPoint);
         List<Vector2Int> GetShapeTileIndices();
         int GetShapeCount();
+        bool CheckIfAllShapesHaveBeenPlaced();
+
     }
 }

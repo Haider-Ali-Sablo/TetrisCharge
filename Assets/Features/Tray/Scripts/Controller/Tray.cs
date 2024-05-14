@@ -82,5 +82,10 @@ namespace Sablo.Gameplay.Shape
         {
             return _shapeList.Count;
         }
+
+        public bool CheckIfAllShapesHaveBeenPlaced()
+        {
+            return _view.HaveAllShapesBeenPlaced();
+        }
     }
 }

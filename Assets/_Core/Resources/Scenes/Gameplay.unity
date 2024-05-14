@@ -557,7 +557,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 153, y: -768}
+  m_AnchoredPosition: {x: 248, y: -618}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &947195978 stripped
@@ -971,7 +971,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -241, y: -756}
+  m_AnchoredPosition: {x: -65, y: -756}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1408971155
@@ -1248,11 +1248,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5568607429127174791, guid: 3405afdd4629648538e13b024cdfc667, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0
+      value: -28
       objectReference: {fileID: 0}
     - target: {fileID: 5568607429127174791, guid: 3405afdd4629648538e13b024cdfc667, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 684
+      value: 608
       objectReference: {fileID: 0}
     - target: {fileID: 6452363344875063465, guid: 3405afdd4629648538e13b024cdfc667, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1260,7 +1260,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6452363344875063465, guid: 3405afdd4629648538e13b024cdfc667, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -476
+      value: -593
       objectReference: {fileID: 0}
     - target: {fileID: 6452363345532119384, guid: 3405afdd4629648538e13b024cdfc667, type: 3}
       propertyPath: m_Pivot.x
@@ -1352,19 +1352,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6452363345626470145, guid: 3405afdd4629648538e13b024cdfc667, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 334
+      value: 293
       objectReference: {fileID: 0}
     - target: {fileID: 6452363345626470145, guid: 3405afdd4629648538e13b024cdfc667, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 662
+      value: 608
       objectReference: {fileID: 0}
     - target: {fileID: 6452363346187304289, guid: 3405afdd4629648538e13b024cdfc667, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -310
+      value: -373
       objectReference: {fileID: 0}
     - target: {fileID: 6452363346187304289, guid: 3405afdd4629648538e13b024cdfc667, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 655
+      value: 598
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3405afdd4629648538e13b024cdfc667, type: 3}
