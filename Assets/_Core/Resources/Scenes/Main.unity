@@ -946,6 +946,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2444bf3b9e7b64b139750a88b910fae7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1149723188920286448 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2055424736115394749, guid: afd8a1e8da5a44e04b2aa95d9b4ac0b1, type: 3}
+  m_PrefabInstance: {fileID: 1149723188920286446}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1558995443699569416
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -953,6 +964,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2139373639}
     m_Modifications:
+    - target: {fileID: 7444826482899931696, guid: 9533749c22e68467caea113d1ba478ba, type: 3}
+      propertyPath: LoadingBarFillImage
+      value: 
+      objectReference: {fileID: 1149723188920286448}
     - target: {fileID: 7444826482899931708, guid: 9533749c22e68467caea113d1ba478ba, type: 3}
       propertyPath: m_Name
       value: TransitionView
