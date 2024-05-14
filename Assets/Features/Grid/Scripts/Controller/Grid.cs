@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Sablo.Core;
+using Sablo.Gameplay.LevelCompletion;
 using Sablo.Gameplay.Shape;
 using Sablo.UI.Grid;
 using UnityEngine;
@@ -20,9 +21,11 @@ namespace Sablo.Gameplay.Grid
         private Vector2Int _currentClosestCell;
         private List<Vector2Int> _switchesOnGrid;
         private LevelGenerationData _levelData;
+        private int _shapesOnGrid;
 
         
         public ITray TrayHandler { private get; set; }
+        public ILevelComplete LevelHandler { private get; set; }
 
         public override void PreInitialize()
         {
@@ -125,11 +128,32 @@ namespace Sablo.Gameplay.Grid
                 shape.SetPlacementPoint(_currentClosestCell);
                 SetOccupationStateOfCells(true);
                 RemoveHighlightFromPreviousCells();
+                IncrementShapeCount();
+            }
+            CheckIfLevelCompleted();
+        }
+
+        private void CheckIfLevelCompleted()
+        {
+            if (_shapesOnGrid == TrayHandler.GetShapeCount())
+            {
+                LevelHandler.OnLevelComplete();
             }
         }
 
+        private void IncrementShapeCount()
+        {
+            _shapesOnGrid++;
+        }
+
+        private void DecrementShapeCount()
+        {
+            _shapesOnGrid--;
+        }
+        
         public void OnReselectionOfShape(List<Vector2Int> shapeTiles)
         {
+            DecrementShapeCount();
             for (var i = 0; i < shapeTiles.Count; i++)
             {
                 var tileIndex = shapeTiles[i];

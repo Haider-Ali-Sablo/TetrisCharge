@@ -4,7 +4,7 @@ namespace Sablo.UI
 {
     public class BaseView : MonoBehaviour
     {
-        public virtual void Initialize(object model)
+        public virtual void Initialize(object model=null)
         {
             Register();
         }
