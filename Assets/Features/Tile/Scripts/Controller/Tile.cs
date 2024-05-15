@@ -9,6 +9,7 @@ namespace Sablo.Gameplay.Grid
         [SerializeField] private GameObject _overlayImage;
         [SerializeField] private GameObject _switch;
         public float height => _rectTransform.rect.height;
+        public float width => _rectTransform.rect.width;
         
         public void Initialize()
         {

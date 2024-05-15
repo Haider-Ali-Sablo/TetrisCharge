@@ -15,14 +15,9 @@ MonoBehaviour:
   GridWidth: 7
   GridHeight: 5
   SwitchesOnGrid:
-  - {x: 3, y: 3}
-  - {x: 2, y: 2}
-  - {x: 1, y: 2}
-  - {x: 4, y: 3}
-  - {x: 3, y: 0}
-  - {x: 0, y: 4}
+  - {x: 3, y: 2}
+  - {x: 4, y: 1}
+  - {x: 5, y: 4}
   ShapeTypes:
-  - {fileID: 7280994090682080863, guid: 5bc6384a7569f494a98e7c7a3637d095, type: 3}
   - {fileID: 7280994090682080863, guid: cb74c2877c1b2492388364c4eb214baa, type: 3}
-  - {fileID: 7280994090682080863, guid: 2d502e5a1d57043258e8943d5ed130f9, type: 3}
   - {fileID: 7280994090682080863, guid: 3f0541a561c914073bb3b1bedd152d2d, type: 3}

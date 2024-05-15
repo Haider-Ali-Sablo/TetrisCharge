@@ -77,5 +77,15 @@ namespace Sablo.Gameplay.Shape
         {
             return _view.GetTilesIndicesOfShape();
         }
+
+        public int GetShapeCount()
+        {
+            return _shapeList.Count;
+        }
+
+        public bool CheckIfAllShapesHaveBeenPlaced()
+        {
+            return _view.HaveAllShapesBeenPlaced();
+        }
     }
 }

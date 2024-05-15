@@ -71,6 +71,7 @@ namespace Sablo.Gameplay.Shape
                 var shapeTiles = shape.GetTileIndex();
                 var anchorPoint = shape.GetPlacementPoint();
                 _handler.OnReselectionOfShape(shapeTiles, anchorPoint);
+                shape.SetPlacementState(false);
             }
         }
 
@@ -93,6 +94,19 @@ namespace Sablo.Gameplay.Shape
         public List<Vector2Int> GetTilesIndicesOfShape()
         {
             return _currentlySelecedShape.GetTileIndex();
+        }
+
+        public bool HaveAllShapesBeenPlaced()
+        {
+            var allShapesHaveBeenPlaced = true;
+            foreach (var shape in _shapes)
+            {
+                if (!shape.HasBeenPlaced())
+                {
+                    allShapesHaveBeenPlaced = false;
+                }
+            }
+            return allShapesHaveBeenPlaced;
         }
     }
 }

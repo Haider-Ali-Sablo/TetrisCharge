@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Sablo.Core;
+using Sablo.Gameplay.LevelCompletion;
 using Sablo.Gameplay.Shape;
 using Sablo.UI.Grid;
 using UnityEngine;
@@ -20,9 +21,11 @@ namespace Sablo.Gameplay.Grid
         private Vector2Int _currentClosestCell;
         private List<Vector2Int> _switchesOnGrid;
         private LevelGenerationData _levelData;
+        private int _shapesOnGrid;
 
         
         public ITray TrayHandler { private get; set; }
+        public ILevelComplete LevelHandler { private get; set; }
 
         public override void PreInitialize()
         {
@@ -43,8 +46,8 @@ namespace Sablo.Gameplay.Grid
         {
             _highlightedCells = new List<Cell>();
             _currentClosestCell = new Vector2Int();
-            _row0ffset = Configs.GameConfig.GridCellOffsetRow;
-            _column0ffset = Configs.GameConfig.GridCellOffsetColumn;
+            _row0ffset = _baseTile.width;
+            _column0ffset = _baseTile.height;
             _gridWidth = _levelData.GridWidth;
             _gridHeight = _levelData.GridHeight;
             _switchesOnGrid = _levelData.SwitchesOnGrid;
@@ -125,11 +128,32 @@ namespace Sablo.Gameplay.Grid
                 shape.SetPlacementPoint(_currentClosestCell);
                 SetOccupationStateOfCells(true);
                 RemoveHighlightFromPreviousCells();
+                IncrementShapeCount();
+            }
+            CheckIfLevelCompleted();
+        }
+
+        private void CheckIfLevelCompleted()
+        {
+            if (TrayHandler.CheckIfAllShapesHaveBeenPlaced())
+            {
+                LevelHandler.OnLevelComplete();
             }
         }
 
+        private void IncrementShapeCount()
+        {
+            _shapesOnGrid++;
+        }
+
+        private void DecrementShapeCount()
+        {
+            _shapesOnGrid--;
+        }
+        
         public void OnReselectionOfShape(List<Vector2Int> shapeTiles)
         {
+            DecrementShapeCount();
             for (var i = 0; i < shapeTiles.Count; i++)
             {
                 var tileIndex = shapeTiles[i];
