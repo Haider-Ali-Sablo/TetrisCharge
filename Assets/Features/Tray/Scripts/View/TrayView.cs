@@ -46,8 +46,9 @@ namespace Sablo.Gameplay.Shape
         {
             for (var index = 0; index < _dataModel.ShapeTypes.Count; index++)
             {
-                var shape = Instantiate(_dataModel.ShapeTypes[index], _spawnPositions[index], Quaternion.identity, _viewRefs.SpawnParent);
-                shape.Initialize();
+                var position = _spawnPositions[index];
+                var shape = Instantiate(_dataModel.ShapeTypes[index], position, Quaternion.identity, _viewRefs.SpawnParent);
+                shape.Initialize(position);
                 _shapes.Add(shape);
             }
         }

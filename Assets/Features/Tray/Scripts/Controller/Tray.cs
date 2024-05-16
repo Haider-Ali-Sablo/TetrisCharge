@@ -43,7 +43,7 @@ namespace Sablo.Gameplay.Shape
             GridHandler.OnTrayRelease(shape);
         }
 
-        void ITray.OnInputDrag(Vector2 position, Vector2 plugPosition)
+        void ITray.OnInputDrag(Vector3 position, Vector3 plugPosition)
         {
             GridHandler.IsWithinBoundsOfGrid(position, plugPosition);
         }

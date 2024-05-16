@@ -36,7 +36,7 @@ namespace Sablo.UI.Grid
 
         public bool IsWithInBoundsOfGrid(Vector2 position)
         {
-            var isWithinBounds = false;
+            var isWithinBounds = true;
             return isWithinBounds;
         }
     }

@@ -106,7 +106,7 @@ namespace Sablo.Gameplay.Grid
             return isWithInBoundsOfGrid;
         }
 
-        void IGrid.IsWithinBoundsOfGrid(Vector2 shapePosition, Vector2 plugPosition)
+        void IGrid.IsWithinBoundsOfGrid(Vector3 shapePosition, Vector3 plugPosition)
         {
             var isWithInBoundsOfGrid = IsWithinBoundsOfGrid(shapePosition);
             RemoveHighlightFromPreviousCells();
@@ -176,9 +176,10 @@ namespace Sablo.Gameplay.Grid
             }
         }
 
-        private void HighlightShape(Vector2 plugPosition)
+        private void HighlightShape(Vector3 plugPosition)
         {
             var closestCell = GetClosestCell(plugPosition);
+            Debug.Log($"ClosestCell Index: ({closestCell.x},{closestCell.y})");
             if (!CheckIfCellHasActiveSwitch(closestCell)) { return;}
             
             var shapeTiles = TrayHandler.GetShapeTileIndices();
@@ -229,7 +230,7 @@ namespace Sablo.Gameplay.Grid
             _highlightedCells = new List<Cell>();
         }
         
-        private Vector2Int GetClosestCell(Vector2 plugPosition)
+        private Vector2Int GetClosestCell(Vector3 plugPosition)
         {
             var minDistance = Mathf.Infinity;
             var closestIndex = new Vector2Int(-1, -1);
@@ -240,7 +241,7 @@ namespace Sablo.Gameplay.Grid
                 {
                     var cell = _grid[xIndex, yIndex];
                     var cellPosition = cell.GetCellPosition();
-                    var distance = Vector2.Distance(cellPosition, plugPosition);
+                    var distance = Vector3.Distance(cellPosition, plugPosition);
 
                     if (distance < minDistance)
                     {

@@ -6,7 +6,7 @@ namespace Sablo.Gameplay.Grid
     {
         [SerializeField] private Transform _modelTransform;
         [SerializeField] private Vector2Int _index;
-        [SerializeField] private GameObject _switch;
+        [SerializeField] private GameObject _highlight;
         public float height => _modelTransform.localScale.y;
         public float width => _modelTransform.localScale.z;
         
@@ -27,15 +27,15 @@ namespace Sablo.Gameplay.Grid
 
         public void HighlightTile()
         {
-            
+            _highlight.SetActive(true);
         }
 
         public void RemoveHighlight()
         {
-            
+            _highlight.SetActive(false);
         }
 
-        public Vector2 GetPosition()
+        public Vector3 GetPosition()
         {
             return transform.position;
         }

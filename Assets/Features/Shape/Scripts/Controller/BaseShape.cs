@@ -10,12 +10,13 @@ namespace Sablo.Gameplay.Shape
         [SerializeField] private Transform _chargerTransform;
         [SerializeField] private Transform _plugTransform;
         [SerializeField] private Collider _shapeBounds;
+        private Vector3 _defaultTransform;
         
         private List<Vector2Int> _tileIndex;
         private bool _hasBeenPlaced;
         private Vector2Int _placementPoint;
         
-        public virtual void Initialize()
+        public virtual void Initialize(Vector3 _defaultPosition)
         {
             SetIndexData();
         }
