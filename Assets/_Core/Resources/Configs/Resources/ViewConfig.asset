@@ -17,6 +17,6 @@ MonoBehaviour:
   ChargingAnimationDuration: 0.6
   BatteryEmptyTargetFillValue: 0.075
   BatteryFullTargetFillValue: 1
-  ShapeDragSpeed: 200
+  ShapeDragSpeed: 0.01
   LoadingFillDelta: 1
   LoadingBarthreshold: 0.9

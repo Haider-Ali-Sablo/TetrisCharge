@@ -8,6 +8,5 @@ namespace Sablo.Gameplay.Shape
     {
         public ITray TrayHandler;
         public List<BaseShape> ShapeTypes;
-        public List<Vector2> SpawnPoints;
     }
 }

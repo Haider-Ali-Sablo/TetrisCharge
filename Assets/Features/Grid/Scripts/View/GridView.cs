@@ -27,19 +27,16 @@ namespace Sablo.UI.Grid
         }
 
 
-        public Tile SpawnTile(Vector2 position)
+        public Tile SpawnTile(Vector3 position)
         {
-            position.x += _startingPosition.x;
-            position.y += _startingPosition.y;
-            
-            var tile = Instantiate(_refs.DefaultTile, position, Quaternion.identity, _refs.GridRectTransform);
+            var tile = Instantiate(_model.DefaultTile, position, Quaternion.identity, _refs.GridTransform);
             tile.Initialize();
             return tile;
         }
 
         public bool IsWithInBoundsOfGrid(Vector2 position)
         {
-            var isWithinBounds = RectTransformUtility.RectangleContainsScreenPoint(_refs.GridRectTransform, position);
+            var isWithinBounds = false;
             return isWithinBounds;
         }
     }

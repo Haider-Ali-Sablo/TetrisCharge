@@ -8,7 +8,7 @@ namespace Sablo.Gameplay.Grid
         private bool _isOccupied;
         private Vector2Int _index;
         
-        public void Initialize(Vector2 position, Tile _defaultTile, Vector2Int index)
+        public void Initialize(Tile _defaultTile, Vector2Int index)
         {
             AddDefaultTile(_defaultTile);
             SetIndex(index);

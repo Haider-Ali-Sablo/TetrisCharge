@@ -8,12 +8,9 @@ namespace Sablo.Gameplay.Shape
     public class Tray : BaseGameplayModule, ITray
     {
         [SerializeField] private TrayView _view;
-        [SerializeField] private List<Transform> _spawnTransforms;
         private List<BaseShape> _shapeList;
-        private List<Vector2> _spawnPoints;
         
         public IGrid GridHandler { private get; set; }
-        
         
         public override void Initialize()
         {
@@ -30,7 +27,6 @@ namespace Sablo.Gameplay.Shape
         {
             var currentLevel = PlayerPrefs.GetInt(Constants.LevelPrefKeys.CurrentLevel, Configs.LevelConfig.DefaultLevel);
             _shapeList = Configs.LevelConfig.LevelData[currentLevel].ShapeTypes;
-            SetSpawnPoints();
         }
 
         private void InitializeView()
@@ -38,18 +34,8 @@ namespace Sablo.Gameplay.Shape
             _view.Initialize(new TrayViewDataModel
             {
                 TrayHandler = this,
-                SpawnPoints = _spawnPoints,
                 ShapeTypes = _shapeList
             });
-        }
-
-        private void SetSpawnPoints()
-        {
-            _spawnPoints = new List<Vector2>();
-            foreach (var point in _spawnTransforms)
-            {
-                _spawnPoints.Add(point.position);
-            }
         }
         
         void ITray.OnTrayReleased(BaseShape shape)
