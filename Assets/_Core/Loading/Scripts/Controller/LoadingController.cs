@@ -22,7 +22,7 @@ namespace Sablo.Loading
         
         private void LoadScene()
         {
-            _sceneLoadingOperation = SceneManager.LoadSceneAsync(Constants.SceneName.MainScene);
+            _sceneLoadingOperation = SceneManager.LoadSceneAsync(Constants.SceneName.GameplayScene);
             _sceneLoadingOperation.allowSceneActivation = false;
             StartCoroutine( SetProgressState());
         }
