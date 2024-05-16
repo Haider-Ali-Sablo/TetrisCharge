@@ -14,9 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HomeFillDelta: 1
   HomeBarthreshold: 0.9
-  ChargingAnimationDuration: 0.6
+  BatteryChargingAnimationDuration: 0.6
   BatteryEmptyTargetFillValue: 0.075
   BatteryFullTargetFillValue: 1
+  ChargingAnimationDuration: 0.6
+  PhoneBatteryEmptyTargetFillValue: 0.075
+  PhoneBatteryFullTargetFillValue: 1
   ShapeDragSpeed: 200
   LoadingFillDelta: 1
   LoadingBarthreshold: 0.9
