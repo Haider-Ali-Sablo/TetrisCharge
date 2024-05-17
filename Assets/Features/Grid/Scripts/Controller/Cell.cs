@@ -7,8 +7,9 @@ namespace Sablo.Gameplay.Grid
         private Tile _defaultTile;
         private bool _isOccupied;
         private Vector2Int _index;
+        private bool _activeSwitch = false;
         
-        public void Initialize(Vector2 position, Tile _defaultTile, Vector2Int index)
+        public void Initialize(Tile _defaultTile, Vector2Int index)
         {
             AddDefaultTile(_defaultTile);
             SetIndex(index);
@@ -34,7 +35,7 @@ namespace Sablo.Gameplay.Grid
             _defaultTile.RemoveHighlight();
         }
 
-        public Vector2 GetCellPosition()
+        public Vector3 GetCellPosition()
         {
             return _defaultTile.GetPosition();
         }
@@ -51,12 +52,12 @@ namespace Sablo.Gameplay.Grid
 
         public void ActivateSwitch()
         {
-            _defaultTile.ActivateSwitch();
+            _activeSwitch = true;
         }
 
         public bool HasActiveSwitch()
         {
-            return _defaultTile.HasActiveSwitch();
+            return _activeSwitch;
         }
     }
 }

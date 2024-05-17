@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HeightDividingFactor: 1.75
   WidthDividingFactor: 1.25
-  GridCellOffsetRow: 155
-  GridCellOffsetColumn: 152
+  GridCellOffsetRow: 10
+  GridCellOffsetColumn: 10

@@ -26,6 +26,7 @@ namespace Sablo.Gameplay.Grid
         
         public ITray TrayHandler { private get; set; }
         public ILevelComplete LevelHandler { private get; set; }
+        
 
         public override void PreInitialize()
         {
@@ -46,10 +47,10 @@ namespace Sablo.Gameplay.Grid
         {
             _highlightedCells = new List<Cell>();
             _currentClosestCell = new Vector2Int();
+            _gridWidth = Configs.LevelConfig.DefaultGridWidth;
+            _gridHeight = Configs.LevelConfig.DefaultGridHeight;
             _row0ffset = _baseTile.width;
             _column0ffset = _baseTile.height;
-            _gridWidth = _levelData.GridWidth;
-            _gridHeight = _levelData.GridHeight;
             _switchesOnGrid = _levelData.SwitchesOnGrid;
         }
         
@@ -62,19 +63,19 @@ namespace Sablo.Gameplay.Grid
                 for (var columnIndex = _gridHeight-1; columnIndex >=0 ; columnIndex--)
                 {
                     var xPos = rowIndex * _row0ffset;
-                    var yPos = columnIndex * _column0ffset;
-            
-                    var position = new Vector2(xPos, yPos);
+                    var zPos = columnIndex * _column0ffset;
+                    
+                    var position = new Vector3(xPos, 0, zPos);
                     _grid[rowIndex, columnIndex] = CreateNewCell(rowIndex, columnIndex, position);
                 }
             }
         }
         
-        private Cell CreateNewCell(int rowIndex, int columnIndex, Vector2 position)
+        private Cell CreateNewCell(int rowIndex, int columnIndex, Vector3 position)
         {
             var cell = new Cell();
             var tile = _view.SpawnTile(position);
-            cell.Initialize(position, tile, new Vector2Int(rowIndex, columnIndex));
+            cell.Initialize(tile, new Vector2Int(rowIndex, columnIndex));
             return cell;
         }
 
@@ -94,7 +95,8 @@ namespace Sablo.Gameplay.Grid
             {
                 GridWidth = _gridWidth,
                 GridHeight = _gridHeight,
-                CellOffset = _column0ffset
+                CellOffset = _column0ffset,
+                DefaultTile = _baseTile
             });
         }
         
@@ -104,7 +106,7 @@ namespace Sablo.Gameplay.Grid
             return isWithInBoundsOfGrid;
         }
 
-        void IGrid.IsWithinBoundsOfGrid(Vector2 shapePosition, Vector2 plugPosition)
+        void IGrid.IsWithinBoundsOfGrid(Vector3 shapePosition, Vector3 plugPosition)
         {
             var isWithInBoundsOfGrid = IsWithinBoundsOfGrid(shapePosition);
             RemoveHighlightFromPreviousCells();
@@ -122,15 +124,17 @@ namespace Sablo.Gameplay.Grid
             if (isPlugWithinbounds && CanPlaceShape(tileCount))
             {
                 var cell = _grid[_currentClosestCell.x, _currentClosestCell.y];
-                shape.SetShapePosition(cell.GetCellPosition());
+                shape.PlaceShapeOnCell(cell.GetCellPosition());
                 shape.SetPlacementState(true);
                 shape.SetPlugState(false);
                 shape.SetPlacementPoint(_currentClosestCell);
                 SetOccupationStateOfCells(true);
                 RemoveHighlightFromPreviousCells();
                 IncrementShapeCount();
+                CheckIfLevelCompleted();
+                return;
             }
-            CheckIfLevelCompleted();
+            TrayHandler.MoveShapeToOriginalPosition();
         }
 
         private void CheckIfLevelCompleted()
@@ -174,7 +178,7 @@ namespace Sablo.Gameplay.Grid
             }
         }
 
-        private void HighlightShape(Vector2 plugPosition)
+        private void HighlightShape(Vector3 plugPosition)
         {
             var closestCell = GetClosestCell(plugPosition);
             if (!CheckIfCellHasActiveSwitch(closestCell)) { return;}
@@ -227,7 +231,7 @@ namespace Sablo.Gameplay.Grid
             _highlightedCells = new List<Cell>();
         }
         
-        private Vector2Int GetClosestCell(Vector2 plugPosition)
+        private Vector2Int GetClosestCell(Vector3 plugPosition)
         {
             var minDistance = Mathf.Infinity;
             var closestIndex = new Vector2Int(-1, -1);
@@ -238,7 +242,7 @@ namespace Sablo.Gameplay.Grid
                 {
                     var cell = _grid[xIndex, yIndex];
                     var cellPosition = cell.GetCellPosition();
-                    var distance = Vector2.Distance(cellPosition, plugPosition);
+                    var distance = Vector3.Distance(cellPosition, plugPosition);
 
                     if (distance < minDistance)
                     {
