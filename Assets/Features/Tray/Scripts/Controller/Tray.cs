@@ -58,6 +58,11 @@ namespace Sablo.Gameplay.Shape
             }
             GridHandler.OnReselectionOfShape(cellsOnGrid);
         }
+        
+        void ITray.MoveShapeToOriginalPosition()
+        {
+            _view.ReturnShapeToOriginalPosition();
+        }
 
         public List<Vector2Int> GetShapeTileIndices()
         {

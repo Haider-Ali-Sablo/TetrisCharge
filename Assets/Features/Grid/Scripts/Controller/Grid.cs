@@ -124,15 +124,17 @@ namespace Sablo.Gameplay.Grid
             if (isPlugWithinbounds && CanPlaceShape(tileCount))
             {
                 var cell = _grid[_currentClosestCell.x, _currentClosestCell.y];
-                shape.SetShapePosition(cell.GetCellPosition());
+                shape.PlaceShapeOnCell(cell.GetCellPosition());
                 shape.SetPlacementState(true);
                 shape.SetPlugState(false);
                 shape.SetPlacementPoint(_currentClosestCell);
                 SetOccupationStateOfCells(true);
                 RemoveHighlightFromPreviousCells();
                 IncrementShapeCount();
+                CheckIfLevelCompleted();
+                return;
             }
-            CheckIfLevelCompleted();
+            TrayHandler.MoveShapeToOriginalPosition();
         }
 
         private void CheckIfLevelCompleted()
@@ -179,7 +181,6 @@ namespace Sablo.Gameplay.Grid
         private void HighlightShape(Vector3 plugPosition)
         {
             var closestCell = GetClosestCell(plugPosition);
-            Debug.Log($"ClosestCell Index: ({closestCell.x},{closestCell.y})");
             if (!CheckIfCellHasActiveSwitch(closestCell)) { return;}
             
             var shapeTiles = TrayHandler.GetShapeTileIndices();

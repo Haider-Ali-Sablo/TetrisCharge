@@ -15,6 +15,7 @@ namespace Sablo.Gameplay.Shape
         private BaseShape _currentlySelecedShape;
         private List<Vector3> _spawnPositions;
         private Vector3 _previousTouchPosition;
+        private bool _isDragging;
         
         public override void Initialize(object dataModel)
         {
@@ -53,38 +54,47 @@ namespace Sablo.Gameplay.Shape
             }
         }
 
-        private BaseShape IsWithinBoundsOfShape(Vector2 position)
-        {
-            for (var index = 0; index < _shapes.Count; index++)
-            {
-                return default;
-            }
-            return null;
-        }
-
         private void OnTrayReleased()
         {
             _handler.OnTrayReleased(_currentlySelecedShape);
             _currentlySelecedShape = null;
         }
-
+        
         public void OnPointerDown(PointerEventData eventData)
         {
-             _currentlySelecedShape = SelectShape(eventData.position);
-             if (_currentlySelecedShape != null)
-             {
-                 _currentlySelecedShape.SetPlugState(true);
-                 var placementStatus = _currentlySelecedShape.HasBeenPlaced();
-                 if (placementStatus)
-                 {
-                     var shapeTiles = _currentlySelecedShape.GetTileIndex();
-                     var anchorPoint = _currentlySelecedShape.GetPlacementPoint();
-                     _handler.OnReselectionOfShape(shapeTiles, anchorPoint);
-                     _currentlySelecedShape.SetPlacementState(false);
-                 }
-             }
+            _currentlySelecedShape = SelectShape(eventData.position);
+            if (_currentlySelecedShape != null)
+            {
+                PickUpShape(eventData.position);
+                _currentlySelecedShape.SetPlugState(true);
+                var placementStatus = _currentlySelecedShape.HasBeenPlaced();
+                if (placementStatus)
+                {
+                    var shapeTiles = _currentlySelecedShape.GetTileIndex();
+                    var anchorPoint = _currentlySelecedShape.GetPlacementPoint();
+                    _handler.OnReselectionOfShape(shapeTiles, anchorPoint);
+                    _currentlySelecedShape.SetPlacementState(false);
+                }
+            }
         }
-
+        
+        public void OnDrag(PointerEventData eventData)
+        {
+            if (_currentlySelecedShape != null)
+            {
+                var shapePosition = eventData.position;
+                var plugPosition = _currentlySelecedShape.GetPlugPosition();
+                PickUpShape(shapePosition);
+                _handler.OnInputDrag(shapePosition, plugPosition);
+            }
+        }
+        
+        public void OnEndDrag(PointerEventData eventData)
+        {
+            _isDragging = false;
+            if(_currentlySelecedShape!=null){  OnTrayReleased();}
+        }
+        
         private BaseShape SelectShape(Vector2 touchPosition)
         {
             var ray = Camera.main.ScreenPointToRay(touchPosition);
@@ -99,33 +109,31 @@ namespace Sablo.Gameplay.Shape
             }
             return null;
         }
-
-        public void OnDrag(PointerEventData eventData)
-        {
-            if (_currentlySelecedShape != null)
-            {
-                var shapePosition = eventData.position;
-                var plugPosition = _currentlySelecedShape.GetPlugPosition();
-                DragShape(shapePosition);
-                _handler.OnInputDrag(shapePosition, plugPosition);
-            }
-        }
         
-        private void DragShape(Vector2 touchPosition)
+        private void PickUpShape(Vector2 touchPosition)
         {
+            if (_currentlySelecedShape == null) return; 
+        
             var dragSpeed = Configs.ViewConfig.ShapeDragSpeed;
-            var delta = touchPosition - (Vector2)_previousTouchPosition;
-            var worldDelta = new Vector3(delta.x, 0, delta.y) * dragSpeed;
-
-            _currentlySelecedShape.transform.position +=(worldDelta);
+            var yOffset = Configs.ViewConfig.YOffsetonShapePickup;
+            var zOffset = Configs.ViewConfig.ZOffsetonShapePickup;
+            
+            var ray = Camera.main.ScreenPointToRay(touchPosition);
+            var plane = new Plane(Vector3.up, new Vector3(0, _currentlySelecedShape.transform.position.y, 0));
+        
+            if (plane.Raycast(ray, out float enter))
+            { 
+                Vector3 hitPoint = ray.GetPoint(enter);
+                if (!_isDragging)
+                {
+                    hitPoint.y = _currentlySelecedShape.transform.position.y + yOffset;
+                    _isDragging = true;
+                }
+                _currentlySelecedShape.SetShapePosition(hitPoint,dragSpeed);
+            }
             _previousTouchPosition = touchPosition;
         }
-
-        public void OnEndDrag(PointerEventData eventData)
-        {
-            if(_currentlySelecedShape!=null){  OnTrayReleased();}
-        }
-
+        
         public List<Vector2Int> GetTilesIndicesOfShape()
         {
             return _currentlySelecedShape.GetTileIndex();
@@ -142,6 +150,11 @@ namespace Sablo.Gameplay.Shape
                 }
             }
             return allShapesHaveBeenPlaced;
+        }
+
+        public void ReturnShapeToOriginalPosition()
+        {
+            _currentlySelecedShape.ReturnToOriginalPosition();
         }
     }
 }

@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using Sablo.Gameplay.Grid;
 using UnityEngine;
+using DG.Tweening;
+using Sablo.Core;
 
 namespace Sablo.Gameplay.Shape
 {
@@ -10,14 +12,15 @@ namespace Sablo.Gameplay.Shape
         [SerializeField] private Transform _chargerTransform;
         [SerializeField] private Transform _plugTransform;
         [SerializeField] private Collider _shapeBounds;
-        private Vector3 _defaultTransform;
+        private Vector3 _defaultPosition;
         
         private List<Vector2Int> _tileIndex;
         private bool _hasBeenPlaced;
         private Vector2Int _placementPoint;
         
-        public virtual void Initialize(Vector3 _defaultPosition)
+        public virtual void Initialize(Vector3 defaultPosition)
         {
+            _defaultPosition = defaultPosition;
             SetIndexData();
         }
 
@@ -37,19 +40,9 @@ namespace Sablo.Gameplay.Shape
             return _tileIndex;
         }
         
-        public void MoveToPosition(Vector3 targetPosition)
-        {
-            _chargerTransform.position = targetPosition;
-        }
-        
         public Vector3 GetPlugPosition()
         {
             return _plugTransform.position;
-        }
-
-        public void SetShapePosition(Vector3 position)
-        {
-            _chargerTransform.position = position;
         }
 
         public bool HasBeenPlaced()
@@ -72,14 +65,32 @@ namespace Sablo.Gameplay.Shape
             _hasBeenPlaced = state;
         }
 
-        public RectTransform GetShapeBounds()
-        {
-            return default;
-        }
-
         public void SetPlugState(bool state)
         {
             _plugTransform.gameObject.SetActive(state);
+        }
+        
+        public void SetShapePosition(Vector3 targetPosition, float movementSpeed)
+        {
+            var xOffset = Configs.ViewConfig.XOffsetonShapePickup;
+            var zOffset = Configs.ViewConfig.ZOffsetonShapePickup;
+            
+            var offSet = new Vector3(xOffset, 0, zOffset);
+            _chargerTransform.position += offSet;
+            _chargerTransform.position = Vector3.Lerp(_chargerTransform.position, targetPosition, movementSpeed);
+        }
+
+        public void PlaceShapeOnCell(Vector3 cellPosition)
+        {
+            var placementDuration = Configs.ViewConfig.ShapePositionResetDuration;
+            _chargerTransform.DOMove(cellPosition,placementDuration);
+        }
+        
+
+        public void ReturnToOriginalPosition()
+        {
+            var returnDuration = Configs.ViewConfig.ShapePositionResetDuration;
+            _chargerTransform.DOMove(_defaultPosition,returnDuration).SetEase(Ease.OutQuart);
         }
     }
 }

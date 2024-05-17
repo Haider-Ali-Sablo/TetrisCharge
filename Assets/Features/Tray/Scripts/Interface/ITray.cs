@@ -11,6 +11,6 @@ namespace Sablo.Gameplay.Shape
         List<Vector2Int> GetShapeTileIndices();
         int GetShapeCount();
         bool CheckIfAllShapesHaveBeenPlaced();
-
+        void MoveShapeToOriginalPosition();
     }
 }
