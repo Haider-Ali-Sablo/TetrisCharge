@@ -8,36 +8,23 @@ namespace Sablo.Gameplay.Shape
 {
     public class BaseShape : MonoBehaviour
     {
-        [SerializeField] protected List<Tile> _tiles;
+        [SerializeField] protected List<Vector2Int> _tilesIndices;
         [SerializeField] private Transform _chargerTransform;
         [SerializeField] private Transform _plugTransform;
-        [SerializeField] private Collider _shapeBounds;
         private Vector3 _defaultPosition;
-        
-        private List<Vector2Int> _tileIndex;
+
         private bool _hasBeenPlaced;
         private Vector2Int _placementPoint;
         
         public virtual void Initialize(Vector3 defaultPosition)
         {
             _defaultPosition = defaultPosition;
-            SetIndexData();
-        }
-
-        private void SetIndexData()
-        {
-            _tileIndex = new List<Vector2Int>();
             _placementPoint = new Vector2Int();
-            
-            for (var i = 0; i < _tiles.Count; i++)
-            {
-                _tileIndex.Add(_tiles[i].GetTileIndex());
-            }
         }
 
         public List<Vector2Int> GetTileIndex()
         {
-            return _tileIndex;
+            return _tilesIndices;
         }
         
         public Vector3 GetPlugPosition()
@@ -76,8 +63,10 @@ namespace Sablo.Gameplay.Shape
             var zOffset = Configs.ViewConfig.ZOffsetonShapePickup;
             
             var offSet = new Vector3(xOffset, 0, zOffset);
-            _chargerTransform.position += offSet;
+            targetPosition += offSet;
             _chargerTransform.position = Vector3.Lerp(_chargerTransform.position, targetPosition, movementSpeed);
+
+            // _chargerTransform.DOMove(targetPosition, 0);
         }
 
         public void PlaceShapeOnCell(Vector3 cellPosition)

@@ -65,7 +65,7 @@ namespace Sablo.Gameplay.Shape
             _currentlySelecedShape = SelectShape(eventData.position);
             if (_currentlySelecedShape != null)
             {
-                PickUpShape(eventData.position);
+                // PickUpShape(eventData.position);
                 _currentlySelecedShape.SetPlugState(true);
                 var placementStatus = _currentlySelecedShape.HasBeenPlaced();
                 if (placementStatus)
@@ -126,7 +126,7 @@ namespace Sablo.Gameplay.Shape
                 Vector3 hitPoint = ray.GetPoint(enter);
                 if (!_isDragging)
                 {
-                    hitPoint.y = _currentlySelecedShape.transform.position.y + yOffset;
+                    hitPoint.y =  yOffset;
                     _isDragging = true;
                 }
                 _currentlySelecedShape.SetShapePosition(hitPoint,dragSpeed);

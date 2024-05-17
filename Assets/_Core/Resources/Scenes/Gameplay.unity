@@ -1220,6 +1220,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 137970425}
     m_Modifications:
+    - target: {fileID: 1727526882795092897, guid: 3405afdd4629648538e13b024cdfc667, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2706211683133744178, guid: 3405afdd4629648538e13b024cdfc667, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5820350754186157392, guid: 3405afdd4629648538e13b024cdfc667, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6452363345532119385, guid: 3405afdd4629648538e13b024cdfc667, type: 3}
       propertyPath: m_Name
       value: TrayView
