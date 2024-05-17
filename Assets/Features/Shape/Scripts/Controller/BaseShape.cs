@@ -65,13 +65,12 @@ namespace Sablo.Gameplay.Shape
             var offSet = new Vector3(xOffset, 0, zOffset);
             targetPosition += offSet;
             _chargerTransform.position = Vector3.Lerp(_chargerTransform.position, targetPosition, movementSpeed);
-
-            // _chargerTransform.DOMove(targetPosition, 0);
         }
 
         public void PlaceShapeOnCell(Vector3 cellPosition)
         {
-            var placementDuration = Configs.ViewConfig.ShapePositionResetDuration;
+            var placementDuration = Configs.ViewConfig.ShapePlacementDuration;
+            cellPosition.y += Configs.ViewConfig.ShapePlacementYOffset;
             _chargerTransform.DOMove(cellPosition,placementDuration);
         }
         

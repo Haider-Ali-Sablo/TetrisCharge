@@ -10,4 +10,6 @@ public partial class ViewConfig
         public float ZOffsetonShapePickup;
 
         public float ShapePositionResetDuration;
+        public float ShapePlacementDuration;
+        public float ShapePlacementYOffset;
 }

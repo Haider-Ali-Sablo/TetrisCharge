@@ -15,6 +15,10 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: -1.4988481
       objectReference: {fileID: 0}
+    - target: {fileID: 1822992691962546158, guid: 3f0541a561c914073bb3b1bedd152d2d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4042135407720641078, guid: 3f0541a561c914073bb3b1bedd152d2d, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -145,6 +149,10 @@ PrefabInstance:
       propertyPath: m_ReceiveShadows
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: f7a8ba9b96a134af2a294a5949877b09, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8cfab0883791a4cc5955dfba6f76ebc0, type: 2}
     - target: {fileID: 919132149155446097, guid: f7a8ba9b96a134af2a294a5949877b09, type: 3}
       propertyPath: m_Name
       value: I-Shape

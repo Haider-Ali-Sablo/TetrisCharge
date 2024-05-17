@@ -20,8 +20,10 @@ MonoBehaviour:
   ShapeDragSpeed: 0.25
   ShapePickUpSpeed: 0
   XOffsetonShapePickup: 0
-  YOffsetonShapePickup: 2
+  YOffsetonShapePickup: 3
   ZOffsetonShapePickup: 2
   ShapePositionResetDuration: 0.25
+  ShapePlacementDuration: 0.1
+  ShapePlacementYOffset: 0.25
   LoadingFillDelta: 1
   LoadingBarthreshold: 0.9
