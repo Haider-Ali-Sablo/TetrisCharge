@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Features.Level_Progression.Scripts.Interface;
 using Sablo.Core;
-using Sablo.Gameplay.LevelCompletion;
 using Sablo.Gameplay.Shape;
 using Sablo.UI.Grid;
 using UnityEngine;
@@ -26,7 +25,6 @@ namespace Sablo.Gameplay.Grid
 
         
         public ITray TrayHandler { private get; set; }
-        public ILevelComplete LevelHandler { private get; set; }
         public ILevelProgression LevelProgressionHandler { private get; set; }
 
         public override void PreInitialize()
@@ -132,7 +130,7 @@ namespace Sablo.Gameplay.Grid
                 SetOccupationStateOfCells(true);
                 RemoveHighlightFromPreviousCells();
                 IncrementShapeCount();
-                CheckIfLevelCompleted();
+                //CheckIfLevelCompleted();
                 IncreaseBatteryHealth();
                 return;
             }

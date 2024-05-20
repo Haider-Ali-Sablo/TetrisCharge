@@ -10,7 +10,7 @@ namespace Sablo.UI
         [SerializeField] private LevelProgressionViewRefs _viewRefs;
 
         private ILevelProgression _handler;
-        public override void Initialize(object model)
+        public override void Initialize(object model=null)
         {
             base.Initialize(model);
             _handler = model as ILevelProgression;
@@ -33,6 +33,27 @@ namespace Sablo.UI
             _viewRefs.BatteryFillImage.color =  Constants.PhoneCharging.BatteryEmptyColorCode;
             _viewRefs.BatteryFillImage.DOFillAmount(_viewRefs._fillValue, Configs.ViewConfig.ChargingAnimationDuration).SetEase(Ease.Linear);
 
+        }
+
+        public override void Register()
+        {
+            _viewRefs.OkayButton.onClick.AddListener(OnOkayButtonClick);
+        }
+
+        private void OnOkayButtonClick()
+        {
+            _handler.OnNextButtonClicked();
+        }
+
+        public void ShowLevelCompleteScreen()
+        {
+            _viewRefs.CompletionScreen.SetActive(true);
+        }
+
+        public void HideLevelCompleteScreen()
+        {
+            _viewRefs.CompletionScreen.SetActive(false);
+            Unregister();
         }
 
     }
