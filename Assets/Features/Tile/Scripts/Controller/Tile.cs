@@ -4,12 +4,11 @@ namespace Sablo.Gameplay.Grid
 {
     public class Tile: MonoBehaviour
     {
-        [SerializeField] private RectTransform _rectTransform;
+        [SerializeField] private Transform _modelTransform;
         [SerializeField] private Vector2Int _index;
-        [SerializeField] private GameObject _overlayImage;
-        [SerializeField] private GameObject _switch;
-        public float height => _rectTransform.rect.height;
-        public float width => _rectTransform.rect.width;
+        [SerializeField] private GameObject _highlight;
+        public float height => _modelTransform.localScale.y;
+        public float width => _modelTransform.localScale.z;
         
         public void Initialize()
         {
@@ -28,27 +27,27 @@ namespace Sablo.Gameplay.Grid
 
         public void HighlightTile()
         {
-            _overlayImage.SetActive(true);
+            _highlight.SetActive(true);
         }
 
         public void RemoveHighlight()
         {
-            _overlayImage.SetActive(false);
+            _highlight.SetActive(false);
         }
 
-        public Vector2 GetPosition()
+        public Vector3 GetPosition()
         {
-            return _rectTransform.position;
+            return transform.position;
         }
 
         public void ActivateSwitch()
         {
-            _switch.SetActive(true);
+            
         }
 
         public bool HasActiveSwitch()
         {
-            return _switch.activeSelf;
+            return false;
         }
     }
 }

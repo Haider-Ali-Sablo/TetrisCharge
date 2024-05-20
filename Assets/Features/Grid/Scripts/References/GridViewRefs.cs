@@ -5,7 +5,6 @@ namespace Sablo.UI.Grid
 {
     public class GridViewRefs : BaseViewRefs
     {
-        public RectTransform GridRectTransform;
-        public Tile DefaultTile;
+        public Transform GridTransform;
     }
 }
