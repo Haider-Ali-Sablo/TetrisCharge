@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Features.Level_Progression.Scripts.Interface;
+using Sablo.Gameplay.LevelProgress;
 using Sablo.Core;
 using Sablo.Gameplay.Shape;
 using Sablo.UI.Grid;

@@ -1,6 +1,8 @@
 using Sablo.Gameplay.Shape;
 using UnityEngine;
+using Sablo.Gameplay.LevelProgress;
 using Grid = Sablo.Gameplay.Grid.Grid;
+
 
 namespace Sablo.Core
 {

@@ -1,5 +1,5 @@
 
-namespace Features.Level_Progression.Scripts.Interface
+namespace Sablo.Gameplay.LevelProgress
 {
     public interface ILevelProgression
     {
