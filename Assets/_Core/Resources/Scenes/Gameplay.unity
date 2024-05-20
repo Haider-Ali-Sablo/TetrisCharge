@@ -925,6 +925,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _view: {fileID: 1170189321}
   _baseTile: {fileID: 7425450133434387130, guid: 53117bb8be5e24eeb9d1916f94a3c4b4, type: 3}
+  _switchTile: {fileID: 6783711104492439384, guid: 17b0a7ac07de14ef89069b1db130cb8f, type: 3}
 --- !u!1001 &1170189319
 PrefabInstance:
   m_ObjectHideFlags: 0

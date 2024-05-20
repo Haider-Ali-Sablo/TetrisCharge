@@ -11,6 +11,7 @@ namespace Sablo.Gameplay.Grid
     {
         [SerializeField] private GridView _view;
         [SerializeField] private Tile _baseTile;
+        [SerializeField] private Tile _switchTile;
         private int _gridWidth;
         private int _gridHeight;
         private float _row0ffset;
@@ -74,7 +75,7 @@ namespace Sablo.Gameplay.Grid
         private Cell CreateNewCell(int rowIndex, int columnIndex, Vector3 position)
         {
             var cell = new Cell();
-            var tile = _view.SpawnTile(position);
+            var tile = _view.SpawnTile(position, TileType.DefaultTile);
             cell.Initialize(tile, new Vector2Int(rowIndex, columnIndex));
             return cell;
         }
@@ -85,7 +86,9 @@ namespace Sablo.Gameplay.Grid
             {
                 var switchIndex = _switchesOnGrid[index];
                 var cell = _grid[switchIndex.x, switchIndex.y];
-                cell.ActivateSwitch();
+                var position = cell.GetCellPosition();
+                var tile = _view.SpawnTile(position, TileType.SwitchTile);
+                cell.ActivateSwitch(tile);
             }
         }   
         
@@ -96,7 +99,8 @@ namespace Sablo.Gameplay.Grid
                 GridWidth = _gridWidth,
                 GridHeight = _gridHeight,
                 CellOffset = _column0ffset,
-                DefaultTile = _baseTile
+                DefaultTile = _baseTile,
+                SwitchTile = _switchTile
             });
         }
         
