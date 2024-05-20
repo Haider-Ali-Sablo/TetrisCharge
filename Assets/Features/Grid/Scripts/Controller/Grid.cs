@@ -1,6 +1,6 @@
 using System.Collections.Generic;
+using Sablo.Gameplay.LevelProgress;
 using Sablo.Core;
-using Sablo.Gameplay.LevelCompletion;
 using Sablo.Gameplay.Shape;
 using Sablo.UI.Grid;
 using UnityEngine;
@@ -25,8 +25,7 @@ namespace Sablo.Gameplay.Grid
 
         
         public ITray TrayHandler { private get; set; }
-        public ILevelComplete LevelHandler { private get; set; }
-        
+        public ILevelProgression LevelProgressionHandler { private get; set; }
 
         public override void PreInitialize()
         {
@@ -131,19 +130,22 @@ namespace Sablo.Gameplay.Grid
                 SetOccupationStateOfCells(true);
                 RemoveHighlightFromPreviousCells();
                 IncrementShapeCount();
-                CheckIfLevelCompleted();
+                //CheckIfLevelCompleted();
+                IncreaseBatteryHealth();
                 return;
             }
             TrayHandler.MoveShapeToOriginalPosition();
         }
-
-        private void CheckIfLevelCompleted()
+        
+        private void IncreaseBatteryHealth()
         {
-            if (TrayHandler.CheckIfAllShapesHaveBeenPlaced())
-            {
-                LevelHandler.OnLevelComplete();
-            }
+            LevelProgressionHandler.IncreaseBatteryHealth();
         }
+        private void DecreaseBatteryHealth()
+        {
+            LevelProgressionHandler.DecreaseBatteryHealth();
+        }
+        
 
         private void IncrementShapeCount()
         {
@@ -158,6 +160,7 @@ namespace Sablo.Gameplay.Grid
         public void OnReselectionOfShape(List<Vector2Int> shapeTiles)
         {
             DecrementShapeCount();
+            DecreaseBatteryHealth();
             for (var i = 0; i < shapeTiles.Count; i++)
             {
                 var tileIndex = shapeTiles[i];

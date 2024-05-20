@@ -4,6 +4,6 @@ public partial class ViewConfig
 {
    [Header("Phone")] 
    public float ChargingAnimationDuration;
-   public float BatteryEmptyTargetFillValue;
-   public float BatteryFullTargetFillValue;
+   public float PhoneBatteryEmptyTargetFillValue;
+   public float PhoneBatteryFullTargetFillValue;
 }
