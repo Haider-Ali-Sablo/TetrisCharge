@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Sablo.Gameplay.Grid;
 using UnityEngine;
 using DG.Tweening;
 using Sablo.Core;
@@ -20,6 +19,7 @@ namespace Sablo.Gameplay.Shape
         {
             _defaultPosition = defaultPosition;
             _placementPoint = new Vector2Int();
+            ZoomOutScale();
         }
 
         public List<Vector2Int> GetTileIndex()
@@ -56,6 +56,26 @@ namespace Sablo.Gameplay.Shape
         {
             _plugTransform.gameObject.SetActive(state);
         }
+
+        public void SetSelectedState()
+        {
+            SetPlugState(true);
+            ZoomInScale();
+        }
+
+        private void ZoomInScale()
+        {
+            var scale = Configs.ViewConfig.ShapeZoomInScale;
+            var duration = Configs.ViewConfig.ShapeZoomDuration;
+            _chargerTransform.DOScale(scale, duration);
+        }
+        
+        private void ZoomOutScale()
+        {
+            var scale = Configs.ViewConfig.ShapeZoomOutScale;
+            var duration = Configs.ViewConfig.ShapeZoomDuration;
+            _chargerTransform.DOScale(scale, duration);
+        }
         
         public void SetShapePosition(Vector3 targetPosition, float movementSpeed)
         {
@@ -79,6 +99,7 @@ namespace Sablo.Gameplay.Shape
         {
             var returnDuration = Configs.ViewConfig.ShapePositionResetDuration;
             _chargerTransform.DOMove(_defaultPosition,returnDuration).SetEase(Ease.OutQuart);
+            ZoomOutScale();
         }
     }
 }

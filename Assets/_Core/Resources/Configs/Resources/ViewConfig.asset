@@ -25,5 +25,8 @@ MonoBehaviour:
   ShapePositionResetDuration: 0.25
   ShapePlacementDuration: 0.1
   ShapePlacementYOffset: 0.25
+  ShapeZoomOutScale: 0.5
+  ShapeZoomInScale: 1
+  ShapeZoomDuration: 0.2
   LoadingFillDelta: 1
   LoadingBarthreshold: 0.9
