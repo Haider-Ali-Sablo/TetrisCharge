@@ -40,14 +40,9 @@ namespace Sablo.Gameplay.Grid
             return transform.position;
         }
 
-        public void ActivateSwitch()
+        public void DeactivateTile()
         {
-            
-        }
-
-        public bool HasActiveSwitch()
-        {
-            return false;
+            gameObject.SetActive(false);
         }
     }
 }
