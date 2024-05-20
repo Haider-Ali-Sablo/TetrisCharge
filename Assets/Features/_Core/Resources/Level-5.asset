@@ -12,20 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b99cea39720d41fd9724e071f90adac, type: 3}
   m_Name: Level-5
   m_EditorClassIdentifier: 
-  GridWidth: 7
-  GridHeight: 5
   SwitchesOnGrid:
-  - {x: 2, y: 1}
-  - {x: 1, y: 1}
-  - {x: 5, y: 1}
-  - {x: 5, y: 2}
-  - {x: 6, y: 0}
-  - {x: 0, y: 4}
-  - {x: 3, y: 3}
-  - {x: 4, y: 3}
+  - {x: 1, y: 3}
+  - {x: 1, y: 6}
+  - {x: 2, y: 0}
+  - {x: 2, y: 3}
+  - {x: 2, y: 6}
+  - {x: 3, y: 2}
+  - {x: 3, y: 5}
   ShapeTypes:
-  - {fileID: 7280994090682080863, guid: cb74c2877c1b2492388364c4eb214baa, type: 3}
-  - {fileID: 7280994090682080863, guid: cb74c2877c1b2492388364c4eb214baa, type: 3}
-  - {fileID: 7280994090682080863, guid: 5bc6384a7569f494a98e7c7a3637d095, type: 3}
-  - {fileID: 7280994090682080863, guid: 3f0541a561c914073bb3b1bedd152d2d, type: 3}
-  - {fileID: 7280994090682080863, guid: 2d502e5a1d57043258e8943d5ed130f9, type: 3}
+  - {fileID: 4791317698744451468, guid: 59c7c9614351246c9837385f52538eac, type: 3}
+  - {fileID: 6763353442467283115, guid: 5c428e95a0bb5464bb7d1366d2e23518, type: 3}
+  - {fileID: 8023244428649145430, guid: a68195d6973394aa79615fee0b2c8e5c, type: 3}
+  - {fileID: 414028712705187920, guid: 520fd39d99a524235bc3dbdbdd7cd62b, type: 3}
