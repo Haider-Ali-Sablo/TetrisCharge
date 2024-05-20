@@ -169,6 +169,13 @@ namespace Sablo.Gameplay.Grid
             }
         }
 
+        Vector3 IGrid.GetPositionAtIndex(Vector2Int index)
+        {
+            var cell = _grid[index.x, index.y];
+            var position = cell.GetCellPosition();
+            return position;
+        }
+
         private bool CanPlaceShape(int shapeTiles)
         {
             return _highlightedCells.Count == shapeTiles;
