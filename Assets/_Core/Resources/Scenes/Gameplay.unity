@@ -1079,7 +1079,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _view: {fileID: 947195980}
-  plugCount: 0
+  _plugCount: 0
 --- !u!1 &1423421030
 GameObject:
   m_ObjectHideFlags: 0

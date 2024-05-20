@@ -17,8 +17,13 @@ namespace Sablo.Gameplay.LevelProgress
     {
         _view.Initialize(this);
         var currentLevel = GetCurrentLevelCount();
+        EnableCurrentLevelBattery();
         _plugCount = Configs.LevelConfig.LevelData[currentLevel].ShapeTypes.Count;
-        
+    }
+
+    void EnableCurrentLevelBattery()
+    {
+        _view.EnableBattery(GetCurrentLevelCount());
     }
     
 
@@ -32,11 +37,11 @@ namespace Sablo.Gameplay.LevelProgress
     
     void ILevelProgression.IncreaseBatteryHealth()
     {
-        _view.IncreaseBatteryHealth(GetBatteryHealthBasedOnShapes());
+        _view.IncreaseBatteryHealth();
     } 
     void ILevelProgression.DecreaseBatteryHealth()
     {
-        _view.DecreaseBatteryHealth(GetBatteryHealthBasedOnShapes());
+        _view.DecreaseBatteryHealth();
     }
     
     private float GetBatteryHealthBasedOnShapes()
@@ -51,7 +56,12 @@ namespace Sablo.Gameplay.LevelProgress
         UpdateLevelCountInPref();
         LoadScene();
     }
-            
+
+    void ILevelProgression.OnReloadButtonClick()
+    {
+       LoadScene();
+    }
+
     int ILevelProgression.GetCurrentLevel()
     {
         var level = GetCurrentLevelCount();
@@ -60,7 +70,7 @@ namespace Sablo.Gameplay.LevelProgress
             
     private void LoadScene()
     {
-        SceneManager.LoadScene(Constants.SceneName.MainScene);
+        SceneManager.LoadScene(Constants.SceneName.GameplayScene);
     }
     
     private void UpdateLevelCountInPref()
