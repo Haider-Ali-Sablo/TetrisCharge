@@ -73,7 +73,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4403433427861772296, guid: 3f0541a561c914073bb3b1bedd152d2d, type: 3}
       propertyPath: m_Name
-      value: S-Shape
+      value: S1-Shape
+      objectReference: {fileID: 0}
+    - target: {fileID: 5243684503945509481, guid: 3f0541a561c914073bb3b1bedd152d2d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.015
+      objectReference: {fileID: 0}
+    - target: {fileID: 5243684503945509481, guid: 3f0541a561c914073bb3b1bedd152d2d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.506
       objectReference: {fileID: 0}
     - target: {fileID: 7280994090682080863, guid: 3f0541a561c914073bb3b1bedd152d2d, type: 3}
       propertyPath: _tilesIndices.Array.size
