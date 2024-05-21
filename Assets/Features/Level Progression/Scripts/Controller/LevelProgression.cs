@@ -11,6 +11,8 @@ namespace Sablo.Gameplay.LevelProgress
         
     [SerializeField] private LevelProgressionView _view;
     public ITray TrayHandler { private get; set; }
+    public ISfxController SfxHandler { private get; set; }
+
     [SerializeField]private int _plugCount;
     
     public override void Initialize()
@@ -34,22 +36,29 @@ namespace Sablo.Gameplay.LevelProgress
             _view.ShowLevelCompleteScreen();
         }
     }
+
+    void ILevelProgression.PlayBatteryCellAddedSfx()
+    {
+        SfxHandler.PlayBatteryCellAddedSfx();
+    }
+    void ILevelProgression.PlayBatteryCellRemovedSfx()
+    {
+        SfxHandler.PlayBatteryCellRemovedSfx();
+    }
+    void ILevelProgression.PlayLevelCompleteSfx()
+    {
+        SfxHandler.PlayLevelCompleteSfx();
+    }
     
     void ILevelProgression.IncreaseBatteryHealth()
     {
         _view.IncreaseBatteryHealth();
+        SfxHandler.PlayPlugInSfx();
     } 
     void ILevelProgression.DecreaseBatteryHealth()
     {
         _view.DecreaseBatteryHealth();
     }
-    
-    private float GetBatteryHealthBasedOnShapes()
-    { 
-        var batteryHealthValue = 1.0f/_plugCount;
-        return batteryHealthValue;
-    } 
-
     void ILevelProgression.OnNextButtonClicked()
     {
         _view.HideLevelCompleteScreen();

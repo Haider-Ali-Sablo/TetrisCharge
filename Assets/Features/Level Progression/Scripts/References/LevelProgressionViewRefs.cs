@@ -6,7 +6,7 @@ namespace Sablo.UI.LevelProgression
 {
     public class LevelProgressionViewRefs : MonoBehaviour
     {
-        public Image BatteryFillImage;
+        //public Image BatteryFillImage;
         
         [Header("Buttons")]
         public Button OkayButton;

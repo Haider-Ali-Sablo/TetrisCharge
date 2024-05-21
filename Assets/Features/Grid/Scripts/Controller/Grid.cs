@@ -140,7 +140,7 @@ namespace Sablo.Gameplay.Grid
             }
             TrayHandler.MoveShapeToOriginalPosition();
         }
-        
+
         private void IncreaseBatteryHealth()
         {
             LevelProgressionHandler.IncreaseBatteryHealth();

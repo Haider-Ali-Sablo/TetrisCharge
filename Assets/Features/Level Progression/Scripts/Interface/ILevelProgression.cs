@@ -7,7 +7,11 @@ namespace Sablo.Gameplay.LevelProgress
         void DecreaseBatteryHealth();
         void OnNextButtonClicked();
         void OnReloadButtonClick();
+        void PlayBatteryCellAddedSfx();
+        void PlayBatteryCellRemovedSfx();
+        void PlayLevelCompleteSfx();
         int GetCurrentLevel();
         void CheckIfLevelCompleted();
+        
     }
 }

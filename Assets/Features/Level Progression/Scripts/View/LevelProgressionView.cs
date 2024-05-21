@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Threading.Tasks;
 using DG.Tweening;
 using Sablo.Gameplay.LevelProgress;
 using Sablo.Core;
@@ -15,26 +16,21 @@ namespace Sablo.UI.LevelProgress
 
         private ILevelProgression _handler;
         
-        private float _fillValue;
-        private float _chargingAnimationDuration;
-        private Image _batteryFillImage;
         private Battery _currentBattery;
+        private int _currentLevel;
+
         
         public override void Initialize(object model=null)
         {
             base.Initialize(model);
             _handler = model as ILevelProgression;
-            //_batteryFillImage = _viewRefs.BatteryFillImage;
-            _chargingAnimationDuration = Configs.ViewConfig.ChargingAnimationDuration;
-            //_batteryFillImage.color =  Constants.PhoneCharging.BatteryEmptyColorCode;
-            //_batteryFillImage.fillAmount = Configs.ViewConfig.BatteryEmptyTargetFillValue;
         }
 
         IEnumerator AnimateCells()
         {
             for (int i = _currentBattery.cells.Length - 1; i >= 0; i--)
             {
-                yield return new WaitForSeconds(.15f);
+                yield return new WaitForSeconds(.17f);
                 _currentBattery.cells[i].SetActive(false);
             }
         }
@@ -42,15 +38,16 @@ namespace Sablo.UI.LevelProgress
         void ChargeBattery()
         {
             _currentBattery.cells[_cellIndex].SetActive(true);
+            _handler.PlayBatteryCellAddedSfx();
             _cellIndex++;
         }
         void DrainBattery()
         {
             _cellIndex--;
             _currentBattery.cells[_cellIndex].SetActive(false);
+            _handler.PlayBatteryCellRemovedSfx();
         }
 
-        private int _currentLevel;
         
         public void EnableBattery(int currentLevel)
         {
@@ -78,27 +75,6 @@ namespace Sablo.UI.LevelProgress
         {
             DrainBattery();
         }
-
-        #region Old Code to charge and drain battery
-        // public void IncreaseBatteryHealth(float progress)
-        // {
-        //     _fillValue+=progress;
-        //     _batteryFillImage.color =  Constants.PhoneCharging.BatteryFullColorCode;
-        //     _batteryFillImage.DOFillAmount(_fillValue, _chargingAnimationDuration).SetEase(Ease.Linear).OnComplete(
-        //         () =>
-        //         {
-        //             _handler.CheckIfLevelCompleted();
-        //         });
-        // }
-        // public void DecreaseBatteryHealth(float progress)
-        // {
-        //     _fillValue -= progress;
-        //     _batteryFillImage.color =  Constants.PhoneCharging.BatteryEmptyColorCode;
-        //     _batteryFillImage.DOFillAmount(_fillValue, _chargingAnimationDuration).SetEase(Ease.Linear);
-        //
-        // }
-        #endregion
-
         public override void Register()
         {
             _viewRefs.OkayButton.onClick.AddListener(OnOkayButtonClick);
@@ -117,7 +93,14 @@ namespace Sablo.UI.LevelProgress
 
         public void ShowLevelCompleteScreen()
         {
+            StartCoroutine(ShowLevelCompleteScreenWithDelay(.5f));
+        }
+        private IEnumerator ShowLevelCompleteScreenWithDelay(float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            _handler.PlayLevelCompleteSfx();
             _viewRefs.InGameScreen.SetActive(false);
+            yield return new WaitForSeconds(delay);
             _viewRefs.CompletionScreen.SetActive(true);
         }
 
