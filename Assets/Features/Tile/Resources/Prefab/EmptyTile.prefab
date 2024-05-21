@@ -52,6 +52,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7026010840590635813, guid: 180adff3411534132b296d719e7fa068, type: 3}
+      propertyPath: _model
+      value: 
+      objectReference: {fileID: 3264557334679432770}
+    - target: {fileID: 7026010840590635813, guid: 180adff3411534132b296d719e7fa068, type: 3}
       propertyPath: _highlight
       value: 
       objectReference: {fileID: 2073795705971925891}
@@ -68,6 +72,11 @@ PrefabInstance:
 --- !u!4 &194893947838964422 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 304414280941943641, guid: 180adff3411534132b296d719e7fa068, type: 3}
+  m_PrefabInstance: {fileID: 472060128934828447}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3264557334679432770 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3153383641023756253, guid: 180adff3411534132b296d719e7fa068, type: 3}
   m_PrefabInstance: {fileID: 472060128934828447}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &5349900311998258670 stripped

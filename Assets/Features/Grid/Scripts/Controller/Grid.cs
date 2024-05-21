@@ -21,6 +21,7 @@ namespace Sablo.Gameplay.Grid
         private List<Cell> _currentlyOccupiedCells;
         private Vector2Int _currentClosestCell;
         private List<Vector2Int> _switchesOnGrid;
+        private List<Vector2Int> _inActiveCellsOnGrid;
         private LevelGenerationData _levelData;
         private int _shapesOnGrid;
 
@@ -41,6 +42,7 @@ namespace Sablo.Gameplay.Grid
             InitializeView();
             GenerateGrid();
             ActivateSwitchesOnGrid();
+            DeActivateCellsOnGrid();
         }
         
         private void SetData()
@@ -52,6 +54,7 @@ namespace Sablo.Gameplay.Grid
             _row0ffset = _baseTile.width;
             _column0ffset = _baseTile.height;
             _switchesOnGrid = _levelData.SwitchesOnGrid;
+            _inActiveCellsOnGrid = _levelData.InActiveTilesOnGrid;
         }
         
         public void GenerateGrid()
@@ -88,6 +91,16 @@ namespace Sablo.Gameplay.Grid
                 var position = cell.GetCellPosition();
                 var tile = _view.SpawnTile(position, TileType.SwitchTile);
                 cell.ActivateSwitch(tile);
+            }
+        }   
+        
+        private void DeActivateCellsOnGrid()
+        {
+            for (var index = 0; index < _inActiveCellsOnGrid.Count; index++)
+            {
+                var cellIndex = _inActiveCellsOnGrid[index];
+                var cell = _grid[cellIndex.x, cellIndex.y];
+                cell.DeactivateCell();
             }
         }   
         
@@ -195,7 +208,8 @@ namespace Sablo.Gameplay.Grid
         private void HighlightShape(Vector3 plugPosition)
         {
             var closestCell = GetClosestCell(plugPosition);
-            if (!CheckIfCellHasActiveSwitch(closestCell)) { return;}
+            if (!CheckIfCellIsActive(closestCell)) { return;}
+            // if (!CheckIfCellHasActiveSwitch(closestCell)) { return;}
             
             var shapeTiles = TrayHandler.GetShapeTileIndices();
             _currentClosestCell = closestCell;
@@ -209,7 +223,7 @@ namespace Sablo.Gameplay.Grid
                     return;
                 }
                 var cell = _grid[index.x, index.y];
-                if (cell.IsCellOccupied())
+                if (cell.IsCellOccupied() || !cell.IsCellActive())
                 {
                     _highlightedCells = new List<Cell>(); 
                     return;
@@ -225,6 +239,12 @@ namespace Sablo.Gameplay.Grid
             return cell.HasActiveSwitch();
         }
         
+        
+        private bool CheckIfCellIsActive(Vector2Int index)
+        {
+            var cell = _grid[index.x, index.y];
+            return cell.IsCellActive();
+        }
         
         private void HighlightCells()
         {

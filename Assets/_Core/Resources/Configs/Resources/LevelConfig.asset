@@ -16,18 +16,8 @@ MonoBehaviour:
   DefaultGridWidth: 8
   DefaultGridHeight: 8
   LevelData:
-  - {fileID: 11400000, guid: bd342ba49eb3e424aaf259a0ba1d15a0, type: 2}
-  - {fileID: 11400000, guid: d690764bcd38b4c88884fe659f7c4276, type: 2}
   - {fileID: 11400000, guid: 47e484024cc7b42d1870cab3552f62ad, type: 2}
-  - {fileID: 11400000, guid: 6fbde10a4ae2a488487b562a90cac2a0, type: 2}
   - {fileID: 11400000, guid: 4fc59331dac17437ba3db1ef2456ea85, type: 2}
-  - {fileID: 11400000, guid: 2667d412ba690471c890f5ebbbdbf6ca, type: 2}
-  - {fileID: 11400000, guid: 4c9f707f32e2340a6aaea6345c094c75, type: 2}
-  - {fileID: 11400000, guid: 0bd203bdce8264e72920eb4cccab7ec9, type: 2}
-  - {fileID: 11400000, guid: e155c1503dd434a0483a2c7dc44f9903, type: 2}
-  - {fileID: 11400000, guid: 9a6f0fbec12b84072b3a920d9a57fe88, type: 2}
-  - {fileID: 11400000, guid: bb87969fa4a1348198df5191da806166, type: 2}
-  - {fileID: 11400000, guid: 2eda3a2e7a6e84e8fb8b7f00726e3731, type: 2}
-  - {fileID: 11400000, guid: 9370658de5dc24d409258401025cec5c, type: 2}
-  - {fileID: 11400000, guid: eb27e11b7eae6438a93aa294b56a6dbb, type: 2}
-  - {fileID: 11400000, guid: 66daa1164e9114f1e82d29f776b7691c, type: 2}
+  - {fileID: 11400000, guid: 4fc59331dac17437ba3db1ef2456ea85, type: 2}
+  - {fileID: 11400000, guid: 4fc59331dac17437ba3db1ef2456ea85, type: 2}
+  - {fileID: 11400000, guid: 4fc59331dac17437ba3db1ef2456ea85, type: 2}

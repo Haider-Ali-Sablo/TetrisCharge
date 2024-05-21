@@ -8,10 +8,12 @@ namespace Sablo.Gameplay.Grid
         private bool _isOccupied;
         private Vector2Int _index;
         private bool _activeSwitch = false;
+        private bool _isCellActive;
         
         public void Initialize(Tile _defaultTile, Vector2Int index)
         {
             AddDefaultTile(_defaultTile);
+            _isCellActive = true;
             SetIndex(index);
         }
 
@@ -58,9 +60,25 @@ namespace Sablo.Gameplay.Grid
             _activeSwitch = true;
         }
 
+        public void DeactivateCell()
+        {
+            SetCellState(false);
+            _currentTile.DeactivateTile();
+        }
+
         public bool HasActiveSwitch()
         {
             return _activeSwitch;
+        }
+
+        public bool IsCellActive()
+        {
+            return _isCellActive;
+        }
+
+        private void SetCellState(bool state)
+        {
+            _isCellActive = state;
         }
     }
 }

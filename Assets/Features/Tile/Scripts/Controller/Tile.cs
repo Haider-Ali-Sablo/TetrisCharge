@@ -7,6 +7,7 @@ namespace Sablo.Gameplay.Grid
         [SerializeField] private Transform _modelTransform;
         [SerializeField] private Vector2Int _index;
         [SerializeField] private GameObject _highlight;
+        [SerializeField] private GameObject _model;
         public float height => _modelTransform.localScale.y;
         public float width => _modelTransform.localScale.z;
         
@@ -42,7 +43,7 @@ namespace Sablo.Gameplay.Grid
 
         public void DeactivateTile()
         {
-            gameObject.SetActive(false);
+            _model.SetActive(false);
         }
     }
 }
