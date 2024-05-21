@@ -209,7 +209,6 @@ namespace Sablo.Gameplay.Grid
         {
             var closestCell = GetClosestCell(plugPosition);
             if (!CheckIfCellIsActive(closestCell)) { return;}
-            // if (!CheckIfCellHasActiveSwitch(closestCell)) { return;}
             
             var shapeTiles = TrayHandler.GetShapeTileIndices();
             _currentClosestCell = closestCell;
