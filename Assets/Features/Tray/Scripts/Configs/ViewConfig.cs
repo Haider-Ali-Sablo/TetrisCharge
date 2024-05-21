@@ -12,4 +12,9 @@ public partial class ViewConfig
         public float ShapePositionResetDuration;
         public float ShapePlacementDuration;
         public float ShapePlacementYOffset;
+
+        public float ShapeZoomOutScale;
+        public float ShapeZoomInScale;
+        public float ShapeZoomDuration;
+        
 }

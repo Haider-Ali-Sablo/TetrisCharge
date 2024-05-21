@@ -9,5 +9,6 @@ namespace Sablo.Gameplay.Grid
         void IsWithinBoundsOfGrid(Vector3 position, Vector3 plugPosition);
         void OnTrayRelease(BaseShape shape);
         void OnReselectionOfShape(List<Vector2Int> shapeTiles);
+        Vector3 GetPositionAtIndex(Vector2Int index);
     }
 }

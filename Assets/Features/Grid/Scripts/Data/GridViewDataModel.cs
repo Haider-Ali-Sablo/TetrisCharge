@@ -8,5 +8,6 @@ namespace Sablo.UI.Grid
         public float GridHeight;
         public float CellOffset;
         public Tile DefaultTile;
+        public Tile SwitchTile;
     }
 }

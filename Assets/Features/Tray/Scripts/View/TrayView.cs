@@ -65,8 +65,7 @@ namespace Sablo.Gameplay.Shape
             _currentlySelecedShape = SelectShape(eventData.position);
             if (_currentlySelecedShape != null)
             {
-                // PickUpShape(eventData.position);
-                _currentlySelecedShape.SetPlugState(true);
+                _currentlySelecedShape.SetSelectedState();
                 var placementStatus = _currentlySelecedShape.HasBeenPlaced();
                 if (placementStatus)
                 {
@@ -116,7 +115,6 @@ namespace Sablo.Gameplay.Shape
         
             var dragSpeed = Configs.ViewConfig.ShapeDragSpeed;
             var yOffset = Configs.ViewConfig.YOffsetonShapePickup;
-            var zOffset = Configs.ViewConfig.ZOffsetonShapePickup;
             
             var ray = Camera.main.ScreenPointToRay(touchPosition);
             var plane = new Plane(Vector3.up, new Vector3(0, _currentlySelecedShape.transform.position.y, 0));

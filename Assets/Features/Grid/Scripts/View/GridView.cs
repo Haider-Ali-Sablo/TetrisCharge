@@ -27,9 +27,22 @@ namespace Sablo.UI.Grid
         }
 
 
-        public Tile SpawnTile(Vector3 position)
+        public Tile SpawnTile(Vector3 position, TileType type)
         {
-            var tile = Instantiate(_model.DefaultTile, position, Quaternion.identity, _refs.GridTransform);
+            var tileToSpawn = new Tile();
+            switch (type)
+            {
+                case TileType.DefaultTile:
+                    tileToSpawn = _model.DefaultTile;
+                    break;
+                case TileType.SwitchTile:
+                    tileToSpawn = _model.SwitchTile;
+                    break;
+                default:
+                    tileToSpawn = _model.DefaultTile;
+                    break;
+            }
+            var tile = Instantiate(tileToSpawn, position, Quaternion.identity, _refs.GridTransform);
             tile.Initialize();
             return tile;
         }
